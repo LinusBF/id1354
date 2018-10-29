@@ -1,5 +1,5 @@
 <?php
-DEFINE("ROOT_PATH", "/id1354/seminar1/" );
+DEFINE("ROOT_PATH", getenv ("PRODUCTION") !== false ? "/seminar1/" : "/id1354/seminar1/");
 ?>
 <html>
 <head>
