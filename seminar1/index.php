@@ -6,7 +6,7 @@ include_once "./controllers/recipeController.php";
 
 $pageHeadTag = function () {
 	?>
-	<link rel="stylesheet" href="<?php echo CSS_PATH; ?>css/index.css">
+	<link rel="stylesheet" href="<?php echo __DIR__; ?>css/index.css">
 	<?php
 };
 
@@ -19,7 +19,7 @@ $pageContent = function () {
 			<h2 class="recipe-title"><?php echo $featuredRecipe['title'];?></h2>
 		</span>
 		<p class="mb-5"><?php echo $featuredRecipe['shortDesc'];?></p>
-		<a class="btn btn-primary" href="<?php echo ROOT_PATH."recipe.php?recipe=".$featuredRecipe['urlName']; ?>" role="button">
+		<a class="btn btn-primary" href="<?php echo __DIR__ ."recipe.php?recipe=".$featuredRecipe['urlName']; ?>" role="button">
 			Cook this menu
 		</a>
 	</div>

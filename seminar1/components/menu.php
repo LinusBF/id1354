@@ -1,13 +1,13 @@
 <?php
 
-include_once ROOT_PATH."controllers/recipeController.php";
+include_once __DIR__."controllers/recipeController.php";
 
 function getMenu($sActive) {
 	$sActiveHTML = " <span class='sr-only'>(current)</span>";
 	$aRecipes = getRecipes();
 	?>
 	<nav class="navbar navbar-expand-lg navbar-dark">
-		<a class="navbar-brand" href="<?php echo ROOT_PATH."index.php";?>">Recipes.com</a>
+		<a class="navbar-brand" href="<?php echo __DIR__."index.php";?>">Recipes.com</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -22,14 +22,14 @@ function getMenu($sActive) {
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<?php foreach ($aRecipes as $recipe):?>
-							<a class="dropdown-item" href="<?php echo ROOT_PATH."recipe.php?recipe=".$recipe['urlName']; ?>">
+							<a class="dropdown-item" href="<?php echo __DIR__."recipe.php?recipe=".$recipe['urlName']; ?>">
 								<?php echo $recipe['name'];; ?>
 							</a>
 						<?php endforeach;?>
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo ROOT_PATH."calendar.php";?>">
+					<a class="nav-link" href="<?php echo __DIR__."calendar.php";?>">
 						Calendar<?php echo ($sActive === "calendar" ? $sActiveHTML : "")?>
 					</a>
 				</li>
