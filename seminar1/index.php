@@ -1,6 +1,5 @@
 <?php
-DEFINE( "ROOT_PATH", getenv( "PRODUCTION" ) !== false ? "/seminar1/" : "/id1354/seminar1/" );
-var_dump(__FILE__);
+DEFINE( "ROOT_PATH", getenv( "PRODUCTION" ) !== false ? "/app/seminar1/" : "/id1354/seminar1/" );
 include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
 
