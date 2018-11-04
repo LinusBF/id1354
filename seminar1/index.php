@@ -1,11 +1,12 @@
 <?php
 DEFINE( "ROOT_PATH", getenv( "PRODUCTION" ) !== false ? "/app/seminar1/" : "/id1354/seminar1/" );
+DEFINE( "CSS_PATH", getenv( "PRODUCTION" ) !== false ? "/seminar1/" : "/id1354/seminar1/" );
 include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
 
 $pageHeadTag = function () {
 	?>
-	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>css/index.css">
+	<link rel="stylesheet" href="<?php echo CSS_PATH; ?>css/index.css">
 	<?php
 };
 
