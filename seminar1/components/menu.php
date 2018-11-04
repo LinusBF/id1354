@@ -1,19 +1,10 @@
 <?php
 
+include_once ROOT_PATH."controllers/recipeController.php";
+
 function getMenu($sActive) {
 	$sActiveHTML = " <span class='sr-only'>(current)</span>";
-	$aRecipes = array(
-		array(
-			"id"   => "mballs",
-			"name" => "Meatballs",
-			"link" => ROOT_PATH . "pages/recipes/meatballs.php"
-		),
-		array(
-			"id" => "pcakes",
-			"name" => "Pancakes",
-			"link" => ROOT_PATH."pages/recipes/pancakes.php"
-		)
-	);
+	$aRecipes = getRecipes();
 	?>
 	<nav class="navbar navbar-expand-lg navbar-dark">
 		<a class="navbar-brand" href="<?php echo ROOT_PATH."index.php";?>">Recipes.com</a>
@@ -31,14 +22,14 @@ function getMenu($sActive) {
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<?php foreach ($aRecipes as $recipe):?>
-							<a class="dropdown-item" href="<?php echo $recipe['link']; ?>">
+							<a class="dropdown-item" href="<?php echo ROOT_PATH."recipe.php?recipe=".$recipe['urlName']; ?>">
 								<?php echo $recipe['name'];; ?>
 							</a>
 						<?php endforeach;?>
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo ROOT_PATH."pages/calendar.php";?>">
+					<a class="nav-link" href="<?php echo ROOT_PATH."calendar.php";?>">
 						Calendar<?php echo ($sActive === "calendar" ? $sActiveHTML : "")?>
 					</a>
 				</li>

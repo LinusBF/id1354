@@ -1,0 +1,16 @@
+.featured-description {
+	width: 35%;
+}
+
+.featured-description .btn {
+	width: 175px;
+	font-size: 16pt;
+	text-transform: uppercase;
+}
+
+#recipe-hero {
+	width: 65%;
+	overflow: hidden;
+	height: 100%;
+	position: relative;
+}
