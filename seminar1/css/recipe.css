@@ -1,7 +1,29 @@
+.recipe-link a{
+	font-size: 18pt;
+}
+
 .recipe-wrapper {
 	width: 45%;
 }
 
 #recipe-hero {
 	width: 55%;
+}
+
+.instructions-wrapper {
+	text-align: left;
+}
+
+.instructions-list {
+	list-style: circle;
+}
+
+.tooltip-btn{
+	color: #FFFFFF;
+}
+
+.tooltip-btn:hover{
+	text-decoration: none;
+	color: #FFFFFF;
+	cursor: initial;
 }

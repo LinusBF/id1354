@@ -20,8 +20,22 @@ function getFeaturedId(){
 
 function parseRecipeInstruction($instruction, $recipe, $ingredients){
 	$pattern = '/({\\d+})/';
-	$replaceFunction = function ($match) use (&$ingredients){
-		return ($ingredients[substr($match[0], 1, 1)]['name']);
+	$replaceFunction = function ($match) use (&$ingredients, &$recipe){
+		$ingredientId = substr($match[0], 1, 1);
+		$ingredient = $ingredients[$ingredientId];
+		$ingredientAmount = null;
+		foreach ($recipe['ingredients'] as $i) {
+			if ($i['id'] == $ingredientId) {
+				$ingredientAmount = $i['amount'];
+				break;
+			}
+		}
+		$tooltopString = $ingredientAmount.$ingredient['unit'];
+		$tooltopContent = $ingredient['name'];
+		$tooltipHtml = "<a class='tooltip-btn' href='#'
+						data-toggle='tooltip' data-placement='top' title='$tooltopString'>
+						$tooltopContent</a>";
+		return ($tooltipHtml);
 	};
 	$parsedInstruction = preg_replace_callback($pattern, $replaceFunction, $instruction);
 

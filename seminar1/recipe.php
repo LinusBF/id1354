@@ -25,23 +25,23 @@ $pageContent = function () {
 		die("No recipe with that name!");
 	}
 	?>
-	<div class="recipe-wrapper px-5 d-flex flex-column justify-content-center align-items-center">
-		<span class="mb-3">
+	<div class="recipe-wrapper px-5 d-flex flex-column justify-content-center align-items-start">
+		<span class="mb-5">
 			<h2 class="recipe-title"><?php echo $currentRecipe['title']; ?></h2>
 		</span>
-		<div class="ingredients-wrapper">
+		<div class="ingredients-wrapper mb-3">
 			<ol>
 				<?php foreach ($currentRecipe['ingredients'] as $ingredient): ?>
-					<li class="mb-1"><?php echo $ingredients[$ingredient['id']]['name']."	".$ingredient['amount'].$ingredients[$ingredient['id']]['unit'] ?></li>
+					<li class="mb-1"><?php echo $ingredients[$ingredient['id']]['name']."	-	".$ingredient['amount'].$ingredients[$ingredient['id']]['unit'] ?></li>
 				<?php endforeach; ?>
 			</ol>
 		</div>
 		<div class="instructions-wrapper">
-			<ol>
+			<ul class="instructions-list">
 				<?php foreach ($currentRecipe['steps'] as $step): ?>
-					<li class="mb-1"><?php echo parseRecipeInstruction($step['instruction'], $currentRecipe, $ingredients); ?></li>
+					<li class="mb-2"><?php echo parseRecipeInstruction($step['instruction'], $currentRecipe, $ingredients); ?></li>
 				<?php endforeach; ?>
-			</ol>
+			</ul>
 		</div>
 	</div>
 	<div id="recipe-hero" class="hero-img">
@@ -56,8 +56,8 @@ $sidebarContent = function () {
 	<div class="side-bar-content text-center d-flex flex-column justify-content-center">
 		<h3 class="mb-3">All Recipes:</h3>
 		<?php foreach ($recipes as $recipe): ?>
-			<div>
-				<h4><?php echo $recipe['title'] ?></h4>
+			<div class="recipe-link mb-3">
+				<a href="?recipe=<?php echo $recipe['urlName']?>"><?php echo $recipe['title'] ?></a>
 			</div>
 		<?php endforeach; ?>
 	</div>
