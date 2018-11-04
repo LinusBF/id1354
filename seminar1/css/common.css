@@ -65,6 +65,8 @@ p {
 
 .recipe-title {
 	text-transform: uppercase;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 24pt;
 	display: inline;
 	padding: 0.2em 0.5em;
 	margin-left: -3rem;
