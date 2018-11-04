@@ -4,17 +4,17 @@
  * @return array
  */
 function getRecipes(){
-	$recipes = json_decode(file_get_contents(__DIR__."data/recipes.json"), true);
+	$recipes = json_decode(file_get_contents(ROOT_PATH."data/recipes.json"), true);
 	return $recipes['recipes'];
 }
 
 function getIngredients(){
-	$recipes = json_decode(file_get_contents(__DIR__."data/recipes.json"), true);
+	$recipes = json_decode(file_get_contents(ROOT_PATH."data/recipes.json"), true);
 	return $recipes['ingredients'];
 }
 
 function getFeaturedId(){
-	$recipes = json_decode(file_get_contents(__DIR__."data/recipes.json"), true);
+	$recipes = json_decode(file_get_contents(ROOT_PATH."data/recipes.json"), true);
 	return $recipes['featured'];
 }
 

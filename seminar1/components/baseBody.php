@@ -1,12 +1,12 @@
 <?php
-include __DIR__."components/menu.php";
+include ROOT_PATH."components/menu.php";
 
 function printBody($pageName, $contentFunc, Callable $sidebarFunc = null, Callable $headTag = null) {
 	?>
 	<html>
 	<head>
 		<?php
-		include __DIR__."components/defaultHead.php";
+		include ROOT_PATH."components/defaultHead.php";
 		if($headTag != null){
 			$headTag();
 		}
@@ -31,7 +31,7 @@ function printBody($pageName, $contentFunc, Callable $sidebarFunc = null, Callab
 			<?php $contentFunc(); ?>
 		</div>
 	</div>
-	<?php include __DIR__."components/defaultFooter.php" ?>
+	<?php include ROOT_PATH."components/defaultFooter.php" ?>
 	</body>
 	</html>
 	<?php
