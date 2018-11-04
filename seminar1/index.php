@@ -1,9 +1,6 @@
 <?php
-var_dump($_SERVER['DOCUMENT_ROOT']);
-var_dump(__DIR__);
-var_dump(__FILE__);
-DEFINE( "ROOT_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/" : "/id1354/seminar1/" );
-DEFINE( "CSS_PATH", getenv( "PRODUCTION" ) !== false ? "/seminar1/" : "/id1354/seminar1/" );
+DEFINE("ROOT_PATH", getenv("PRODUCTION") !== false ? "/seminar1/" : "/id1354/seminar1/");
+DEFINE( "APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar1/" : "/id1354/seminar1/" );
 include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
 

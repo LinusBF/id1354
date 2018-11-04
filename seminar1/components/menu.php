@@ -1,6 +1,6 @@
 <?php
 
-include_once ROOT_PATH."controllers/recipeController.php";
+include_once APP_PATH."controllers/recipeController.php";
 
 function getMenu($sActive) {
 	$sActiveHTML = " <span class='sr-only'>(current)</span>";
