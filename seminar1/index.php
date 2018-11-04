@@ -1,12 +1,12 @@
 <?php
-DEFINE("ROOT_PATH", getenv("PRODUCTION") !== false ? "/seminar1/" : "/id1354/seminar1/");
-DEFINE( "APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar1/" : "/id1354/seminar1/" );
+DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar1/" : "/id1354/seminar1/");
+DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar1/" : "/id1354/seminar1/");
 include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
 
 $pageHeadTag = function () {
 	?>
-	<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>css/index.css">
+	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/index.css">
 	<?php
 };
 
@@ -19,7 +19,7 @@ $pageContent = function () {
 			<h2 class="recipe-title"><?php echo $featuredRecipe['title'];?></h2>
 		</span>
 		<p class="mb-5"><?php echo $featuredRecipe['shortDesc'];?></p>
-		<a class="btn btn-primary" href="<?php echo ROOT_PATH."recipe.php?recipe=".$featuredRecipe['urlName']; ?>" role="button">
+		<a class="btn btn-primary" href="<?php echo LINK_PATH . "recipe.php?recipe=" . $featuredRecipe['urlName']; ?>" role="button">
 			Cook this menu
 		</a>
 	</div>
