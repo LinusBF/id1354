@@ -5,6 +5,7 @@ include_once APP_PATH."controllers/recipeController.php";
 function getMenu($sActive) {
 	$sActiveHTML = " <span class='sr-only'>(current)</span>";
 	$aRecipes = getRecipes();
+	$calendarDate = "?year=".date_format(new DateTime(), "Y")."&month=".date_format(new DateTime(), "M");
 	?>
 	<nav class="navbar navbar-expand-lg navbar-dark">
 		<a class="navbar-brand" href="<?php echo LINK_PATH . "index.php";?>">Recipes.com</a>
@@ -29,7 +30,7 @@ function getMenu($sActive) {
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo LINK_PATH . "calendar.php";?>">
+					<a class="nav-link" href="<?php echo LINK_PATH . "calendar.php".$calendarDate;?>">
 						Calendar<?php echo ($sActive === "calendar" ? $sActiveHTML : "")?>
 					</a>
 				</li>
