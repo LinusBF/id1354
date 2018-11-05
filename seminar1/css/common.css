@@ -44,6 +44,11 @@ a:hover {
 	border-bottom: #7e8d9b 1px solid;
 }
 
+.nav-link.active {
+	text-decoration: underline;
+	color: #FFFFFF;
+}
+
 .dropdown-menu {
 	background-color: #343C49;
 }

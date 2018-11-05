@@ -3,7 +3,6 @@
 include_once APP_PATH."controllers/recipeController.php";
 
 function getMenu($sActive) {
-	$sActiveHTML = " <span class='sr-only'>(current)</span>";
 	$aRecipes = getRecipes();
 	$today = new DateTime();
 	$calendarDate = "?year=".$today->format("Y")."&month=".$today->format("m");
@@ -18,9 +17,9 @@ function getMenu($sActive) {
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+					<a class="nav-link dropdown-toggle <?php echo ($sActive === "recipe" ? "active" : "")?>" href="#" id="navbarDropdown" role="button"
 					   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Recipes<?php echo ($sActive === "recipe" ? $sActiveHTML : "")?>
+						Recipes
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<?php foreach ($aRecipes as $recipe):?>
@@ -31,8 +30,8 @@ function getMenu($sActive) {
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<?php echo LINK_PATH . "calendar.php".$calendarDate;?>">
-						Calendar<?php echo ($sActive === "calendar" ? $sActiveHTML : "")?>
+					<a class="nav-link <?php echo ($sActive === "calendar" ? "active" : "")?>" href="<?php echo LINK_PATH . "calendar.php".$calendarDate;?>">
+						Calendar
 					</a>
 				</li>
 			</ul>
