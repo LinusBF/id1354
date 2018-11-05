@@ -1,0 +1,31 @@
+.calendar-list {
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-gap: 1em;
+}
+
+.calendar-day {
+	padding: 3.2em;
+	border: 1px solid white;
+	position: relative;
+	background-size: cover;
+	background: no-repeat center;
+	text-align: center;
+}
+
+.recipe-on-day {
+	cursor: pointer;
+}
+
+.recipe-on-day span {
+	padding: 5px;
+	background-color: rgba(50, 58, 71, 0.8);
+	border-radius: 3px;
+}
+
+.calendar-nav {
+	position: absolute;
+	bottom: 0px;
+	left: -5px;
+}

@@ -5,7 +5,8 @@ include_once APP_PATH."controllers/recipeController.php";
 function getMenu($sActive) {
 	$sActiveHTML = " <span class='sr-only'>(current)</span>";
 	$aRecipes = getRecipes();
-	$calendarDate = "?year=".date_format(new DateTime(), "Y")."&month=".date_format(new DateTime(), "M");
+	$today = new DateTime();
+	$calendarDate = "?year=".$today->format("Y")."&month=".$today->format("m");
 	?>
 	<nav class="navbar navbar-expand-lg navbar-dark">
 		<a class="navbar-brand" href="<?php echo LINK_PATH . "index.php";?>">Recipes.com</a>

@@ -7,6 +7,7 @@
       "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "urlName": "meatballs",
       "heroImg": "meatballsHighRes.jpg",
+      "thumbImg": "meatballsThumb.jpg",
       "ingredients": [
         {
           "id": 0,
@@ -67,6 +68,7 @@
       "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "urlName": "pancakes",
       "heroImg": "pancakesHighRes.jpg",
+      "thumbImg": "pancakesThumb.png",
       "ingredients": [
         {
           "id": 0,
