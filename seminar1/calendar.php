@@ -1,6 +1,12 @@
 <?php
 DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar1/" : "/id1354/seminar1/");
 DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar1/" : "/id1354/seminar1/");
+
+if(!key_exists("month", $_GET) || !key_exists("year", $_GET)){
+	header("Location: ".LINK_PATH.'index.php');
+	die();
+}
+
 include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
 include_once "./controllers/calendarController.php";
@@ -64,7 +70,7 @@ $sidebarContent = function () {
 		<?php foreach ($recipesByMonth as $recipe): ?>
 			<div class="recipe-link mb-3 d-inline">
 				<span><?php echo $recipe['date'];?>:</span>
-				<a href="?recipe=<?php echo $recipes[$recipe['recipeId']]['urlName']?>"><?php echo $recipes[$recipe['recipeId']]['title'] ?></a>
+				<a href="<?php echo LINK_PATH."recipe.php?recipe=".$recipes[$recipe['recipeId']]['urlName']?>"><?php echo $recipes[$recipe['recipeId']]['title'] ?></a>
 			</div>
 		<?php endforeach; ?>
 		<div class="calendar-nav w-100">

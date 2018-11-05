@@ -4,6 +4,11 @@ DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"].
 include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
 
+if(!key_exists("recipe", $_GET)){
+	header("Location: ".LINK_PATH.'index.php');
+	die();
+}
+
 $pageHeadTag = function () {
 	?>
 	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/recipe.css">
