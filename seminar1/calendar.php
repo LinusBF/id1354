@@ -16,6 +16,7 @@ $pageHeadTag = function () {
 	if($_GET['month'] < 1) $_GET['month'] = 12;
 	?>
 	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/calendar.css">
+	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/responsive/calendar-resp.css">
 	<?php
 };
 
@@ -66,15 +67,17 @@ $sidebarContent = function () {
 	$nextMonthLink = "?year=".$_GET['year']."&month=".($_GET['month'] + 1);
 	?>
 	<div class="side-bar-content text-center d-flex flex-column justify-content-start">
-		<h3 class="mb-3">Recipes of <?php echo $firstOfTheMonth->format("M");?>:</h3>
-		<?php foreach ($recipesByMonth as $recipe): ?>
-			<div class="recipe-link mb-3 d-inline">
-				<span><?php echo $recipe['date'];?>:</span>
-				<a href="<?php echo LINK_PATH."recipe.php?recipe=".$recipes[$recipe['recipeId']]['urlName']?>"><?php echo $recipes[$recipe['recipeId']]['title'] ?></a>
-			</div>
-		<?php endforeach; ?>
+		<div class="d-none d-md-flex flex-column justify-content-start">
+			<h3 class="mb-3">Recipes of <?php echo $firstOfTheMonth->format("M");?>:</h3>
+			<?php foreach ($recipesByMonth as $recipe): ?>
+				<div class="recipe-link mb-3 d-inline">
+					<span><?php echo $recipe['date'];?>:</span>
+					<a href="<?php echo LINK_PATH."recipe.php?recipe=".$recipes[$recipe['recipeId']]['urlName']?>"><?php echo $recipes[$recipe['recipeId']]['title'] ?></a>
+				</div>
+			<?php endforeach; ?>
+		</div>
 		<div class="calendar-nav w-100">
-			<hr class="w-75">
+			<hr class="d-none d-md-block w-75">
 			<div class="w-100 px-3 d-flex justify-content-between">
 				<a href="<?php echo LINK_PATH . "calendar.php".$prevMonthLink ?>">&lt;&lt; <?php echo $prevMonth->format("M")?></a>
 				<a href="<?php echo LINK_PATH . "calendar.php".$nextMonthLink ?>"><?php echo $nextMonth->format("M")?> &gt;&gt;</a>

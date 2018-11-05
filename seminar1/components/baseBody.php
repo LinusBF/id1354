@@ -15,7 +15,7 @@ function printBody($pageName, $contentFunc, Callable $sidebarFunc = null, Callab
 		<title>ID1354 - Seminar 1</title>
 	</head>
 	<body>
-	<div class="content-wrapper w-100 d-flex flex-row justify-content-start align-content-center">
+	<div class="content-wrapper w-100 d-flex flex-column flex-md-row justify-content-start align-content-center">
 		<div class="left-side h-100 align-self-center pb-3">
 			<?php
 			getMenu($pageName);
@@ -23,12 +23,12 @@ function printBody($pageName, $contentFunc, Callable $sidebarFunc = null, Callab
 				$sidebarFunc();
 			} else {
 				?>
-				<span class="side-bar-fallback">Recipes</span>
+				<span class="side-bar-fallback"> --- Recipes ---</span>
 				<?php
 			}
 			?>
 		</div>
-		<div class="right-side h-100 d-flex flex-row justify-content-end">
+		<div class="right-side h-100 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-end">
 			<?php $contentFunc(); ?>
 		</div>
 	</div>

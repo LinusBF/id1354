@@ -1,0 +1,43 @@
+@media (max-width: 1500px) {
+	.navbar {
+		width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.left-side {
+		height: 35% !important;
+		width: 100% !important;
+	}
+
+	.right-side {
+		height: 65% !important;
+		width: 100%;
+	}
+
+	.side-bar-content {
+		width: 100%;
+		padding: 65px 15px;
+	}
+}
+
+@media (max-width: 576px) {
+	.left-side {
+		height: 35% !important;
+		width: 100% !important;
+	}
+
+	.right-side {
+		height: 65% !important;
+		width: 100%;
+	}
+
+	.side-bar-content {
+		width: 100%;
+		padding: 65px 15px;
+	}
+
+	.navbar-nav {
+		background-color: #555c69;
+	}
+}

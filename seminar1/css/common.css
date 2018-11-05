@@ -39,19 +39,27 @@ a:hover {
 .navbar {
 	position: absolute;
 	background-color: #343C49;
-	height: 5%;
-	width: 20%;
+	height: 7%;
+	width: 25%;
 	border-bottom: #7e8d9b 1px solid;
 	z-index: 10;
+}
+
+.navbar-collapse {
+	text-align: right;
+}
+
+.navbar-nav {
+	text-align: right;
+}
+
+.dropdown-menu {
+	background-color: #555c69;
 }
 
 .nav-link.active {
 	text-decoration: underline;
 	color: #FFFFFF;
-}
-
-.dropdown-menu {
-	background-color: #343C49;
 }
 
 .dropdown-item {
@@ -60,9 +68,10 @@ a:hover {
 
 .side-bar-content {
 	position: relative;
-	top: 5%;
+	top: 7%;
 	padding: 15px 5px;
 	height: 95%;
+	overflow-y: scroll;
 }
 
 .content-wrapper {
@@ -73,12 +82,12 @@ a:hover {
 	background-color: #343C49;
 	-webkit-box-shadow: 10px 0 5px -2px #212a37;
 	box-shadow: 5px 0 5px -2px #212a37;
-	width: 20%;
+	width: 25%;
 	z-index: 5;
 }
 
 .right-side {
-	width: 80%;
+	width: 75%;
 	overflow-x: hidden;
 	z-index: 2;
 }
@@ -101,4 +110,12 @@ a:hover {
 	width: 100%;
 	height: 100%;
 	align-self: center;
+}
+
+.side-bar-fallback {
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
 }

@@ -4,6 +4,8 @@
 
 .recipe-wrapper {
 	width: 45%;
+	padding-top: 15%;
+	overflow-y: scroll;
 }
 
 #recipe-hero {

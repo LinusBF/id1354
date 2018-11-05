@@ -7,6 +7,7 @@ include_once "./controllers/recipeController.php";
 $pageHeadTag = function () {
 	?>
 	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/index.css">
+	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/responsive/index-resp.css">
 	<?php
 };
 
@@ -14,7 +15,7 @@ $pageContent = function () {
 	$recipes = getRecipes();
 	$featuredRecipe = $recipes[getFeaturedId()];
 	?>
-	<div class="featured-description px-5 d-flex flex-column justify-content-center align-items-center">
+	<div class="featured-description px-5 py-4 py-sm-0 d-flex flex-column justify-content-center align-items-center">
 		<span class="mb-3">
 			<span class="recipe-title"><?php echo $featuredRecipe['title'];?></span>
 		</span>

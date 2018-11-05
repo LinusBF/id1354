@@ -12,6 +12,7 @@ if(!key_exists("recipe", $_GET)){
 $pageHeadTag = function () {
 	?>
 	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/recipe.css">
+	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/responsive/recipe-resp.css">
 	<?php
 };
 
@@ -58,7 +59,7 @@ $pageContent = function () {
 $sidebarContent = function () {
 	$recipes = getRecipes();
 	?>
-	<div class="side-bar-content text-center d-flex flex-column justify-content-start">
+	<div class="side-bar-content text-center d-none d-md-flex flex-column justify-content-start">
 		<h3 class="mb-3">All Recipes:</h3>
 		<?php foreach ($recipes as $recipe): ?>
 			<div class="recipe-link mb-3">
