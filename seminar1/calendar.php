@@ -70,8 +70,8 @@ $sidebarContent = function () {
 		<div class="calendar-nav w-100">
 			<hr class="w-75">
 			<div class="w-100 px-3 d-flex justify-content-between">
-				<a href="<?php echo LINK_PATH . "calendar.php".$prevMonthLink ?>"><< <?php echo $prevMonth->format("M")?></a>
-				<a href="<?php echo LINK_PATH . "calendar.php".$nextMonthLink ?>"><?php echo $nextMonth->format("M")?> >></a>
+				<a href="<?php echo LINK_PATH . "calendar.php".$prevMonthLink ?>">&lt;&lt; <?php echo $prevMonth->format("M")?></a>
+				<a href="<?php echo LINK_PATH . "calendar.php".$nextMonthLink ?>"><?php echo $nextMonth->format("M")?> &gt;&gt;</a>
 			</div>
 		</div>
 	</div>

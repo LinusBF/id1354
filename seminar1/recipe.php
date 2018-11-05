@@ -27,7 +27,7 @@ $pageContent = function () {
 	?>
 	<div class="recipe-wrapper px-5 d-flex flex-column justify-content-center align-items-start">
 		<span class="mb-5">
-			<h2 class="recipe-title"><?php echo $currentRecipe['title']; ?></h2>
+			<span class="recipe-title"><?php echo $currentRecipe['title']; ?></span>
 		</span>
 		<div class="ingredients-wrapper mb-3">
 			<ol>

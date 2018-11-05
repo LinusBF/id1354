@@ -3,7 +3,8 @@ include APP_PATH."components/menu.php";
 
 function printBody($pageName, $contentFunc, Callable $sidebarFunc = null, Callable $headTag = null) {
 	?>
-	<html>
+	<!DOCTYPE html>
+	<html lang="en">
 	<head>
 		<?php
 		include APP_PATH."components/defaultHead.php";

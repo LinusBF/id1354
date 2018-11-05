@@ -8,7 +8,7 @@ function getMenu($sActive) {
 	$calendarDate = "?year=".$today->format("Y")."&month=".$today->format("m");
 	?>
 	<nav class="navbar navbar-expand-lg navbar-dark">
-		<a class="navbar-brand" href="<?php echo LINK_PATH . "index.php";?>">Recipes.com</a>
+		<a class="navbar-brand" href="<?php echo LINK_PATH . "index.php";?>">TastyRecipes.com</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>

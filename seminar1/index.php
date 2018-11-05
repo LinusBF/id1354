@@ -16,7 +16,7 @@ $pageContent = function () {
 	?>
 	<div class="featured-description px-5 d-flex flex-column justify-content-center align-items-center">
 		<span class="mb-3">
-			<h2 class="recipe-title"><?php echo $featuredRecipe['title'];?></h2>
+			<span class="recipe-title"><?php echo $featuredRecipe['title'];?></span>
 		</span>
 		<p class="mb-5"><?php echo $featuredRecipe['shortDesc'];?></p>
 		<a class="btn btn-primary" href="<?php echo LINK_PATH . "recipe.php?recipe=" . $featuredRecipe['urlName']; ?>" role="button">
@@ -32,7 +32,7 @@ $pageContent = function () {
 $sideBarContent = function () {
 	?>
 	<div class="side-bar-content text-center d-flex flex-column justify-content-start">
-		<h3 class="mb-3">Welcome to a recipe site!</h3>
+		<h3 class="mb-3">Welcome to Tasty Recipes!</h3>
 		<p class="px-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 			Curabitur efficitur erat nec tortor finibus varius.
 			<br>
