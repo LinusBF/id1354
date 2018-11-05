@@ -18,6 +18,7 @@
 	.side-bar-content {
 		width: 100%;
 		padding: 65px 15px;
+		overflow-y: scroll;
 	}
 }
 
