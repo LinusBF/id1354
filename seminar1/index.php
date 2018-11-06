@@ -1,6 +1,6 @@
 <?php
 DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar1/" : "/id1354/seminar1/");
-DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar1/" : "/id1354/seminar1/");
+DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar1/" : str_replace("\\", "/", __DIR__)."/");
 include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
 
