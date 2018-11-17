@@ -1,0 +1,161 @@
+{
+  "recipes": [
+    {
+      "id": 0,
+      "name": "Meatballs",
+      "title": "Glorious swedish meatballs",
+      "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "urlName": "meatballs",
+      "heroImg": "meatballsHighRes.jpg",
+      "thumbImg": "meatballsThumb.jpg",
+      "ingredients": [
+        {
+          "id": 0,
+          "amount": "30"
+        },
+        {
+          "id": 1,
+          "amount": "1"
+        },
+        {
+          "id": 2,
+          "amount": "about 1"
+        },
+        {
+          "id": 3,
+          "amount": "about 1"
+        },
+        {
+          "id": 4,
+          "amount": "500"
+        },
+        {
+          "id": 5,
+          "amount": "1"
+        },
+        {
+          "id": 6,
+          "amount": "400"
+        }
+      ],
+      "steps": [
+        {
+          "nr": 1,
+          "instruction": "Get all the ingredients..."
+        },
+        {
+          "nr": 2,
+          "instruction": "Put the {4} in a large bowl."
+        },
+        {
+          "nr": 3,
+          "instruction": "Add the {0}, {2} & {3} to the bowl and mix everything."
+        },
+        {
+          "nr": 4,
+          "instruction": "Add the {1} and {5} and mix again."
+        },
+        {
+          "nr": 5,
+          "instruction": "Roll your meatballs to your desired size."
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Pancakes",
+      "title": "Amazingly simple pancakes",
+      "shortDesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "urlName": "pancakes",
+      "heroImg": "pancakesHighRes.jpg",
+      "thumbImg": "pancakesThumb.png",
+      "ingredients": [
+        {
+          "id": 0,
+          "amount": "150"
+        },
+        {
+          "id": 1,
+          "amount": "3"
+        },
+        {
+          "id": 2,
+          "amount": "about 0.5"
+        },
+        {
+          "id": 7,
+          "amount": "500"
+        },
+        {
+          "id": 8,
+          "amount": "1"
+        }
+      ],
+      "steps": [
+        {
+          "nr": 1,
+          "instruction": "Get all the ingredients..."
+        },
+        {
+          "nr": 2,
+          "instruction": "Combine the dry ingredients ({0} and {2}) into a large bowl."
+        },
+        {
+          "nr": 3,
+          "instruction": "Stir in half of the {7} until the mixture is smooth."
+        },
+        {
+          "nr": 4,
+          "instruction": "Add the rest of the {7} and stir in the {1}."
+        },
+        {
+          "nr": 5,
+          "instruction": "Melt the {8} in a pan and add to the batter."
+        },
+        {
+          "nr": 6,
+          "instruction": "Fry thin pancakes in a frying pan. Serve with strawberries and whip cream."
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    {
+      "name": "Flour",
+      "unit": "g"
+    },
+    {
+      "name": "Eggs",
+      "unit": ""
+    },
+    {
+      "name": "Salt",
+      "unit": "tsp"
+    },
+    {
+      "name": "Pepper",
+      "unit": "tsp"
+    },
+    {
+      "name": "Minced Beef",
+      "unit": "g"
+    },
+    {
+      "name": "Worchestire Sauce",
+      "unit": "tbs"
+    },
+    {
+      "name": "Crushed Tomatoes",
+      "unit": "g"
+    },
+    {
+      "name": "Milk",
+      "unit": "dl"
+    },
+    {
+      "name": "Butter",
+      "unit": "g"
+    }
+  ],
+  "featured": 0
+}
