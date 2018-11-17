@@ -41,7 +41,7 @@ class User {
 	}
 
 	/**
-	 * @param Account $uUser
+	 * @param User $uUser
 	 *
 	 * @return bool
 	 */
