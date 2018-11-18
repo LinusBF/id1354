@@ -12,7 +12,7 @@ class UserTable {
 	private const TABLE_NAME = "user";
 	private const TABLE_SQL = "	
 		CREATE TABLE ".UserTable::TABLE_NAME." (
-		 `ID` int(11) NOT NULL AUTO_INCREMENT ON DELETE CASCADE,
+		 `ID` int(11) NOT NULL AUTO_INCREMENT,
 		 `username` varchar(255) NOT NULL UNIQUE,
 		 `email` varchar(255) NOT NULL UNIQUE,
 		 `password` varchar(255),

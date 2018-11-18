@@ -10,9 +10,11 @@ DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"].
 
 include_once "./controllers/recipeController.php";
 include_once "./controllers/userController.php";
+include_once "./controllers/commentController.php";
 
 $recipeController = new RecipeController(RecipeController::USE_XML);
 var_dump(UserController::create("test", "test@test.test", "test"));
+var_dump(CommentController::create("test", 1, 1));
 
 ?>
 <pre>
