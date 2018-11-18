@@ -15,7 +15,7 @@ class CommentTable {
 		 `ID` int(11) NOT NULL AUTO_INCREMENT,
 		 `recipe` int(11) NOT NULL,
 		 `author` int(11) NOT NULL,
-		 `content` TEXT NOT NULL UNIQUE,
+		 `content` TEXT NOT NULL,
 		 `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		 PRIMARY KEY (`ID`),
 		 KEY `author` (`author`),
