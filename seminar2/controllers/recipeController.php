@@ -9,6 +9,40 @@ function getRecipes(){
 }
 
 /**
+ * @param $iRecipeId
+ *
+ * @return array|bool
+ */
+function getRecipeById($iRecipeId){
+	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), true);
+	$currentRecipe = false;
+	foreach ($recipes['recipes'] as $recipe) {
+		if ($recipe['id'] === $iRecipeId) {
+			$currentRecipe = $recipe;
+			break;
+		}
+	}
+	return $currentRecipe;
+}
+
+/**
+ * @param $sUrlName
+ *
+ * @return array|bool
+ */
+function getRecipeByUrlName($sUrlName){
+	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), true);
+	$currentRecipe = false;
+	foreach ($recipes['recipes'] as $recipe) {
+		if ($recipe['urlName'] === $sUrlName) {
+			$currentRecipe = $recipe;
+			break;
+		}
+	}
+	return $currentRecipe;
+}
+
+/**
  * @return array
  */
 function getIngredients(){

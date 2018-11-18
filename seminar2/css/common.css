@@ -45,6 +45,12 @@ a:hover {
 	z-index: 10;
 }
 
+.user-nav {
+	bottom: 0;
+	border-top: #7e8d9b 1px solid;
+	border-bottom: 0;
+}
+
 .navbar-collapse {
 	text-align: right;
 }
@@ -70,7 +76,7 @@ a:hover {
 	position: relative;
 	top: 7%;
 	padding: 15px 5px;
-	height: 95%;
+	height: 86%;
 }
 
 .content-wrapper {
@@ -117,4 +123,38 @@ a:hover {
 	-ms-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
 	transform: rotate(90deg);
+}
+
+::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+::-webkit-scrollbar-button {
+	width: 0px;
+	height: 0px;
+}
+::-webkit-scrollbar-thumb {
+	background: #3498db;
+	border: 0px none #ffffff;
+	border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #3498db;
+}
+::-webkit-scrollbar-thumb:active {
+	background: #3498db;
+}
+::-webkit-scrollbar-track {
+	background: #2f3641;
+	border: 0px none #ffffff;
+	border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+	background: #2f3641;
+}
+::-webkit-scrollbar-track:active {
+	background: #2f3641;
+}
+::-webkit-scrollbar-corner {
+	background: transparent;
 }

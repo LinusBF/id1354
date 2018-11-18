@@ -1,0 +1,15 @@
+.comment-container {
+
+}
+
+.comment-container h5{
+	text-align: left;
+	font-size: 11pt;
+}
+
+.comment-container p{
+	text-align: left;
+	font-size: 13pt;
+	font-style: italic;
+	font-weight: normal;
+}

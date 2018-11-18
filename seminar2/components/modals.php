@@ -1,3 +1,7 @@
+<?php
+include_once APP_PATH."utils/navigationHelper.php";
+?>
+
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerUserModal" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -45,6 +49,7 @@
 			<div class="modal-body">
 				<form id="loginForm" method="POST" action="<?php echo LINK_PATH . "user.php";?>">
 					<input type="hidden" name="action" value="LoginUser">
+					<input type="hidden" name="callee" value="<?php echo full_url($_SERVER) ?>">
 					<div class="form-group">
 						<label for="userName">Username</label>
 						<input type="text" class="form-control" id="userName" name="username" placeholder="Enter username">

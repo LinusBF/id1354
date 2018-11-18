@@ -40,7 +40,7 @@ if(isset($_POST['action']) && $_POST['action'] === "LoginUser"){
 		header("Location: ".LINK_PATH.'index.php?user-login=0');
 	} else {
 		$_SESSION['currentUser'] = $authorized;
-		header( "Location: " . LINK_PATH . 'index.php?user-login=1');
+		header( "Location: ".$_POST['callee']);
 	}
 	die();
 }

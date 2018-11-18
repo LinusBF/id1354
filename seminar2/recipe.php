@@ -3,6 +3,9 @@ DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar2/" : "/id1354/sem
 DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar2/" : str_replace("\\", "/", __DIR__)."/");
 include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
+include_once "./controllers/commentController.php";
+include_once "./controllers/userController.php";
+include_once "./views/commentView.php";
 
 if(!key_exists("recipe", $_GET)){
 	header("Location: ".LINK_PATH.'index.php');
@@ -12,24 +15,16 @@ if(!key_exists("recipe", $_GET)){
 $pageHeadTag = function () {
 	?>
 	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/recipe.css">
+	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/comment.css">
 	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/responsive/recipe-resp.css">
 	<?php
 };
 
 $pageContent = function () {
-	$recipes     = getRecipes();
 	$ingredients = getIngredients();
 
-	$currentRecipe = null;
-	foreach ($recipes as $recipe) {
-		if ($recipe['urlName'] === $_GET['recipe']) {
-			$currentRecipe = $recipe;
-			break;
-		}
-	}
-	if ($currentRecipe === null) {
-		die("No recipe with that name!");
-	}
+	$currentRecipe = getRecipeByUrlName($_GET['recipe']);
+	if ($currentRecipe !== false) :
 	?>
 	<div class="recipe-wrapper px-5 d-flex flex-column justify-content-center align-items-start">
 		<span class="mb-5">
@@ -54,20 +49,50 @@ $pageContent = function () {
 		<img class="" src="media/<?php echo $currentRecipe['heroImg']; ?>" alt="<?php echo $currentRecipe['name']; ?>">
 	</div>
 	<?php
+	else:
+	?>
+	<div class="w-100 px-5 d-flex flex-row justify-content-center align-items-center">
+		<span class="mb-5">
+			<span class="recipe-title">No recipe with that name exists on this site!</span>
+		</span>
+	</div>
+	<?php
+	endif;
 };
 
 $sidebarContent = function () {
-	$recipes = getRecipes();
+	$currentRecipe = getRecipeByUrlName($_GET['recipe']);
+	if ($currentRecipe !== null):
+		$aComments = CommentController::getByRecipe($currentRecipe['id']);
 	?>
 	<div class="side-bar-content text-center d-none d-md-flex flex-column justify-content-start">
-		<h3 class="mb-3">All Recipes:</h3>
-		<?php foreach ($recipes as $recipe): ?>
-			<div class="recipe-link mb-3">
-				<a href="?recipe=<?php echo $recipe['urlName']?>"><?php echo $recipe['title'] ?></a>
-			</div>
-		<?php endforeach; ?>
+		<h3 class="mb-3">Recipe Comments:</h3>
+		<div class="recipe-comments">
+		<?php
+			foreach ($aComments as $comment) {
+				$author = UserController::get( $comment->getAuthorId() );
+				printComment($comment, $author);
+			}
+		?>
+		</div>
+		<?php
+			if(isset($_SESSION['currentUser'])):
+		?>
+		<div class="comment-form-container align-self-center mb-3">
+			<form class="d-flex flex-row justify-content-between" method="POST" action="<?php echo LINK_PATH."comment.php";?>">
+				<input type="hidden" name="action" value="AddComment">
+				<input type="hidden" name="recipeId" value="<?php echo $currentRecipe['id']; ?>">
+				<div class="form-group w-75 mb-0">
+					<label for="commentContent">Write a comment!</label>
+					<input type="text" class="form-control" id="commentContent" name="content" aria-describedby="commentHelp" placeholder="Comment">
+				</div>
+				<button type="submit" class="btn btn-primary h-25 align-self-end">Comment</button>
+			</form>
+		</div>
+		<?php endif;?>
 	</div>
-	<?php
+<?php
+	endif;
 };
 
 printBody("recipe", $pageContent, $sidebarContent, $pageHeadTag);

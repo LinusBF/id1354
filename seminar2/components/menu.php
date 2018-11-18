@@ -43,7 +43,7 @@ function getMenu($sActive) {
 
 function getUserMenu(){
 	?>
-	<nav class="navbar navbar-expand-sm navbar-dark">
+	<nav class="navbar navbar-expand-sm navbar-dark user-nav">
 		<ul class="navbar-nav mr-auto">
 	<?php
 	if(isset($_SESSION['currentUser'])):
