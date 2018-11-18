@@ -8,7 +8,7 @@ include_once "./controllers/recipeController.php";
 if(!key_exists("action", $_POST)
 	|| !key_exists("currentUser", $_SESSION)
 ){
-	header("Location: ".LINK_PATH.'index.php?comment-made=-1');
+	header("Location: ".LINK_PATH.'index.php?comment-action=-1');
 	die();
 }
 
@@ -29,3 +29,26 @@ if($_POST['action'] === "AddComment"){
 	}
 	die();
 }
+
+if($_POST['action'] === "DeleteComment"){
+	if(!isset($_POST['commentId'])){
+		header("Location: ".LINK_PATH.'index.php?comment-deleted=-1');
+		die();
+	}
+
+	$comment = CommentController::get($_POST['commentId']);
+	$result = CommentController::delete($_POST['commentId']);
+	$recipe = getRecipeById($comment->getRecipeId());
+	$sRecipeUrl = LINK_PATH.'recipe.php?recipe='.$recipe['urlName'];
+
+	if($result === false){
+		header("Location: $sRecipeUrl"."&comment-deleted=0");
+	} else {
+		header( "Location: $sRecipeUrl"."&comment-deleted=1");
+	}
+	die();
+}
+
+
+header("Location: ".LINK_PATH.'index.php');
+die();

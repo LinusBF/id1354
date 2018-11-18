@@ -8,7 +8,7 @@ function getMenu($sActive) {
 	$today = new DateTime();
 	$calendarDate = "?year=".$today->format("Y")."&month=".$today->format("m");
 	?>
-	<nav class="navbar navbar-expand-sm navbar-dark">
+	<nav class="navbar navbar-expand-sm navbar-dark main-nav">
 		<a class="navbar-brand" href="<?php echo LINK_PATH . "index.php";?>">TastyRecipes.com</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,33 +44,35 @@ function getMenu($sActive) {
 function getUserMenu(){
 	?>
 	<nav class="navbar navbar-expand-sm navbar-dark user-nav">
-		<ul class="navbar-nav mr-auto">
 	<?php
 	if(isset($_SESSION['currentUser'])):
 	$loggedInUser = UserController::get($_SESSION['currentUser']);?>
-		<li class="nav-item">
-			<a class="nav-link" href="<?php echo LINK_PATH . "user.php?userId=" . $loggedInUser->getId(); ?>">
-				<?php echo $loggedInUser->getName(); ?>
-			</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="<?php echo LINK_PATH . "user.php?logout=1"; ?>">
-				Logout
-			</a>
-		</li>
-	<?php else:?>
-		<li class="nav-item">
-			<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#registerModal">
-				Register!
-			</button>
-		</li>
-		<li class="nav-item">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-				Login
-			</button>
-		</li>
-	<?php endif; ?>
+		<ul class="navbar-nav w-100 d-flex flex-row justify-content-between">
+			<li class="nav-item">
+				<a class="nav-link text-success" href="<?php echo LINK_PATH . "user.php?userId=" . $loggedInUser->getId(); ?>">
+					<?php echo $loggedInUser->getName(); ?>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link text-warning" href="<?php echo LINK_PATH . "user.php?logout=1"; ?>">
+					Logout
+				</a>
+			</li>
 		</ul>
+	<?php else:?>
+		<ul class="navbar-nav w-100 d-flex flex-row justify-content-center">
+			<li class="nav-item mr-5">
+				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#registerModal">
+					Register!
+				</button>
+			</li>
+			<li class="nav-item">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+					Login
+				</button>
+			</li>
+		</ul>
+	<?php endif; ?>
 	</nav>
 	<?php
 }

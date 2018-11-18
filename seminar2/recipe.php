@@ -78,12 +78,11 @@ $sidebarContent = function () {
 		<?php
 			if(isset($_SESSION['currentUser'])):
 		?>
-		<div class="comment-form-container align-self-center mb-3">
+		<div class="comment-form-container align-self-center">
 			<form class="d-flex flex-row justify-content-between" method="POST" action="<?php echo LINK_PATH."comment.php";?>">
 				<input type="hidden" name="action" value="AddComment">
 				<input type="hidden" name="recipeId" value="<?php echo $currentRecipe['id']; ?>">
 				<div class="form-group w-75 mb-0">
-					<label for="commentContent">Write a comment!</label>
 					<input type="text" class="form-control" id="commentContent" name="content" aria-describedby="commentHelp" placeholder="Comment">
 				</div>
 				<button type="submit" class="btn btn-primary h-25 align-self-end">Comment</button>

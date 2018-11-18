@@ -26,7 +26,6 @@ include_once APP_PATH."utils/navigationHelper.php";
 						<label for="userPassword">Password</label>
 						<input type="password" class="form-control" id="userPassword" name="password" placeholder="Password">
 					</div>
-					<input class="d-none" type="submit">
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -58,7 +57,6 @@ include_once APP_PATH."utils/navigationHelper.php";
 						<label for="userPassword">Password</label>
 						<input type="password" class="form-control" id="userPassword" name="password" placeholder="Password">
 					</div>
-					<input class="d-none" type="submit">
 				</form>
 			</div>
 			<div class="modal-footer">

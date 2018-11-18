@@ -2,9 +2,17 @@
 
 }
 
-.comment-container h5{
+.comment-header {
+	align-items: center;
+}
+
+.comment-header h5{
 	text-align: left;
 	font-size: 11pt;
+}
+
+.comment-header .btn{
+	padding-top: 0;
 }
 
 .comment-container p{

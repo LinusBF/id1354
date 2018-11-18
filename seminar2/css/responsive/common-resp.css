@@ -38,7 +38,7 @@
 		padding: 65px 15px;
 	}
 
-	.navbar-nav {
+	.navbar-nav.main-nav {
 		background-color: #555c69;
 	}
 }

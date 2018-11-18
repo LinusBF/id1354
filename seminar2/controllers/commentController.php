@@ -30,6 +30,16 @@ class CommentController {
 		return CommentController::get($iCommentId);
 	}
 
+	public static function delete($iCommentId){
+		$comment = CommentController::get($iCommentId);
+		if($_SESSION['currentUser'] === $comment->getAuthorId()){
+			$commentDB = new CommentTable();
+			return $commentDB->deleteComment($comment->getId());
+		} else {
+			return false;
+		}
+	}
+
 	/**
 	 * @param $iCommentId
 	 *
