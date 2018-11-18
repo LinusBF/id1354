@@ -48,6 +48,7 @@ class dbConnection {
 
 		$result = $connection->query($sSQL);
 		if ($result !== true) {
+			var_dump($connection->error);
 			$connection->close();
 			return false;
 		}
@@ -57,7 +58,6 @@ class dbConnection {
 			$connection->close();
 			return $createdStatus;
 		}
-
 
 		$connection->close();
 		return true;
@@ -104,7 +104,7 @@ class dbConnection {
 		while ($row = $result->fetch_assoc()){
 			array_push($aRows, $row);
 		}
-
+		$connection->close();
 		return $aRows;
 	}
 
