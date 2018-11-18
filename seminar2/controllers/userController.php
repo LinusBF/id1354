@@ -22,6 +22,7 @@ class UserController {
 		$sHashedPass = password_hash($sRawPass, PASSWORD_DEFAULT);
 		$user = new User($sUserName, $sEmail, $sHashedPass);
 		$userDB = new UserTable();
+		if($userDB === false) return false;
 
 		$iUserId = $userDB->putUser($user);
 
@@ -35,10 +36,11 @@ class UserController {
 	/**
 	 * @param $iUserId
 	 *
-	 * @return User
+	 * @return bool|User
 	 */
 	public static function get($iUserId){
 		$userDB = new UserTable();
+		if($userDB === false) return false;
 
 		return $userDB->getUser($iUserId);
 	}
@@ -46,10 +48,11 @@ class UserController {
 	/**
 	 * @param $sUserName
 	 *
-	 * @return User
+	 * @return bool|User
 	 */
 	private static function getByName($sUserName){
 		$userDB = new UserTable();
+		if($userDB === false) return false;
 
 		return $userDB->getUserByName($sUserName);
 	}

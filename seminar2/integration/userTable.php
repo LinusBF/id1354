@@ -21,6 +21,7 @@ class UserTable {
 
 	public function __construct() {
 		$DB = new dbConnection();
+		if($DB === false) return false;
 		$DB->migrateTable(UserTable::TABLE_NAME, UserTable::TABLE_SQL);
 	}
 
