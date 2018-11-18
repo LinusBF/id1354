@@ -8,7 +8,7 @@ include_once "./controllers/recipeController.php";
 if(!key_exists("action", $_POST)
 	|| !key_exists("currentUser", $_SESSION)
 ){
-	header("Location: ".LINK_PATH.'index.php?comment-action=-1');
+	header("Location: ".LINK_PATH.'index.php?action=-1');
 	die();
 }
 

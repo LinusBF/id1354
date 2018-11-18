@@ -1,5 +1,6 @@
 <?php
 include APP_PATH."components/menu.php";
+include APP_PATH."components/errorHandler.php";
 
 session_start();
 
@@ -17,6 +18,7 @@ function printBody($pageName, $contentFunc, Callable $sidebarFunc = null, Callab
 		<title>ID1354 - Seminar 1</title>
 	</head>
 	<body>
+	<?php displayAlertMessages();?>
 	<div class="content-wrapper w-100 d-flex flex-column flex-md-row justify-content-start align-content-center">
 		<div class="left-side h-100 align-self-center pb-3">
 			<?php

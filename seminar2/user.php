@@ -8,7 +8,7 @@ if(!key_exists("userId", $_GET)
    && !key_exists("logout", $_GET)
    && !key_exists("action", $_POST)
 ){
-	header("Location: ".LINK_PATH.'index.php?user-created=-1');
+	header("Location: ".LINK_PATH.'index.php?action=-1');
 	die();
 }
 
@@ -40,7 +40,7 @@ if(isset($_POST['action']) && $_POST['action'] === "LoginUser"){
 		header("Location: ".LINK_PATH.'index.php?user-login=0');
 	} else {
 		$_SESSION['currentUser'] = $authorized;
-		header( "Location: ".$_POST['callee']);
+		header( "Location: ".str_replace("user-login=0", "user-login=1", $_POST['callee']));
 	}
 	die();
 }
