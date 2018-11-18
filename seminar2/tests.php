@@ -9,8 +9,10 @@ DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar2/" : "/id1354/sem
 DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar2/" : str_replace("\\", "/", __DIR__)."/");
 
 include_once "./controllers/recipeController.php";
+include_once "./controllers/userController.php";
 
 $recipeController = new RecipeController(RecipeController::USE_XML);
+UserController::create("test", "test@test.test", "test");
 
 ?>
 <pre>
@@ -18,4 +20,3 @@ $recipeController = new RecipeController(RecipeController::USE_XML);
 var_dump($recipeController->getRecipeByUrlName('meatballs'));
 ?>
 </pre>
-<?php
