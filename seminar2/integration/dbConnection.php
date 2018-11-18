@@ -47,11 +47,6 @@ class dbConnection {
 		$connection = $this->newConnection();
 
 		$result = $connection->query($sSQL);
-		if ($result !== true) {
-			var_dump($connection->error);
-			$connection->close();
-			return false;
-		}
 
 		?>
 		<pre>
@@ -60,6 +55,12 @@ class dbConnection {
 		?>
 		</pre>
 		<?php
+
+		if ($result === false) {
+			var_dump($connection->error);
+			$connection->close();
+			return false;
+		}
 
 		if($result->num_rows < 1){
 			$createdStatus = $connection->query($sCreationSQL);
