@@ -64,6 +64,7 @@ class dbConnection {
 
 		if($result->num_rows < 1){
 			$createdStatus = $connection->query($sCreationSQL);
+			var_dump($connection->error);
 			$connection->close();
 			return $createdStatus;
 		}
