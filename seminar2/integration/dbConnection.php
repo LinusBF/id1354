@@ -73,8 +73,7 @@ class dbConnection {
 	public function runQuery($sQuery, $aToBind, $blGetInsertId = false){
 		$connection = $this->newConnection();
 		$stmt = $connection->prepare($sQuery);
-		var_dump($connection->error_list);
-		return false;
+		var_dump($connection->error);
 
 		$aWildcardTypes = array_map(function($i) {
 			return $i[0];

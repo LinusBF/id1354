@@ -12,7 +12,7 @@ include_once "./controllers/recipeController.php";
 include_once "./controllers/userController.php";
 
 $recipeController = new RecipeController(RecipeController::USE_XML);
-UserController::create("test", "test@test.test", "test");
+var_dump(UserController::create("test", "test@test.test", "test"));
 
 ?>
 <pre>
