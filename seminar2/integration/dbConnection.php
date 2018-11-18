@@ -20,12 +20,13 @@ class dbConnection {
 	private $database;
 
 	public function __construct() {
-		$blEnvSet = getenv("SQL_CONN") !== false;
-		$SQLSettings = getenv("SQL_CONN");
-		$this->server = ($blEnvSet ? $SQLSettings['serverName'] : dbConnection::LOCAL_SQL['serverName']);
-		$this->userName = ($blEnvSet ? $SQLSettings['username'] : dbConnection::LOCAL_SQL['username']);
-		$this->password = ($blEnvSet ? $SQLSettings['password'] : dbConnection::LOCAL_SQL['password']);
-		$this->database = ($blEnvSet ? $SQLSettings['database'] : dbConnection::LOCAL_SQL['database']);
+		$blEnvSet = getenv("CLEARDB_DATABASE_URL") !== false;
+		$SQLSettings = null;
+		if($blEnvSet) $SQLSettings = parse_url(getenv("CLEARDB_DATABASE_URL"));
+		$this->server = ($blEnvSet ? $SQLSettings['host'] : dbConnection::LOCAL_SQL['serverName']);
+		$this->userName = ($blEnvSet ? $SQLSettings['user'] : dbConnection::LOCAL_SQL['username']);
+		$this->password = ($blEnvSet ? $SQLSettings['pass'] : dbConnection::LOCAL_SQL['password']);
+		$this->database = ($blEnvSet ? substr($SQLSettings["path"], 1) : dbConnection::LOCAL_SQL['database']);
 		$connection = $this->newConnection();
 
 		if ($connection->connect_error) {
