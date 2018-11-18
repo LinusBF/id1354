@@ -48,23 +48,13 @@ class dbConnection {
 
 		$result = $connection->query($sSQL);
 
-		?>
-		<pre>
-		<?php
-		var_dump($result);
-		?>
-		</pre>
-		<?php
-
 		if ($result === false) {
-			var_dump($connection->error);
 			$connection->close();
 			return false;
 		}
 
 		if($result->num_rows < 1){
 			$createdStatus = $connection->query($sCreationSQL);
-			var_dump($connection->error);
 			$connection->close();
 			return $createdStatus;
 		}
@@ -83,7 +73,6 @@ class dbConnection {
 	public function runQuery($sQuery, $aToBind, $blGetInsertId = false){
 		$connection = $this->newConnection();
 		$stmt = $connection->prepare($sQuery);
-		var_dump($connection->error);
 
 		$aWildcardTypes = array_map(function($i) {
 			return $i[0];
