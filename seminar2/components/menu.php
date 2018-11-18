@@ -24,8 +24,8 @@ function getMenu($sActive) {
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<?php foreach ($aRecipes as $recipe):?>
-							<a class="dropdown-item" href="<?php echo LINK_PATH . "recipe.php?recipe=" . $recipe['urlName']; ?>">
-								<?php echo $recipe['name'];; ?>
+							<a class="dropdown-item" href="<?php echo LINK_PATH . "recipe.php?recipe=" . $recipe->urlName; ?>">
+								<?php echo $recipe->name; ?>
 							</a>
 						<?php endforeach;?>
 					</div>

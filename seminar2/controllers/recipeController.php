@@ -4,8 +4,8 @@
  * @return array
  */
 function getRecipes(){
-	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), true);
-	return $recipes['recipes'];
+	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), false);
+	return $recipes->recipes;
 }
 
 /**
@@ -14,10 +14,10 @@ function getRecipes(){
  * @return array|bool
  */
 function getRecipeById($iRecipeId){
-	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), true);
+	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), false);
 	$currentRecipe = false;
-	foreach ($recipes['recipes'] as $recipe) {
-		if ($recipe['id'] === $iRecipeId) {
+	foreach ($recipes->recipes as $recipe) {
+		if ($recipe->id === $iRecipeId) {
 			$currentRecipe = $recipe;
 			break;
 		}
@@ -31,10 +31,10 @@ function getRecipeById($iRecipeId){
  * @return array|bool
  */
 function getRecipeByUrlName($sUrlName){
-	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), true);
+	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), false);
 	$currentRecipe = false;
-	foreach ($recipes['recipes'] as $recipe) {
-		if ($recipe['urlName'] === $sUrlName) {
+	foreach ($recipes->recipes as $recipe) {
+		if ($recipe->urlName === $sUrlName) {
 			$currentRecipe = $recipe;
 			break;
 		}
@@ -46,16 +46,16 @@ function getRecipeByUrlName($sUrlName){
  * @return array
  */
 function getIngredients(){
-	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), true);
-	return $recipes['ingredients'];
+	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), false);
+	return $recipes->ingredients;
 }
 
 /**
  * @return int - The recipe ID of the featured item on the home page
  */
 function getFeaturedId(){
-	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), true);
-	return $recipes['featured'];
+	$recipes = json_decode(file_get_contents(APP_PATH."data/recipes.json"), false);
+	return $recipes->featured;
 }
 
 /**
@@ -72,14 +72,14 @@ function parseRecipeInstruction($instruction, $recipe, $ingredients){
 		$ingredientId = substr($match[0], 1, 1);
 		$ingredient = $ingredients[$ingredientId];
 		$ingredientAmount = null;
-		foreach ($recipe['ingredients'] as $i) {
-			if ($i['id'] == $ingredientId) {
-				$ingredientAmount = $i['amount'];
+		foreach ($recipe->ingredients as $i) {
+			if ($i->id == $ingredientId) {
+				$ingredientAmount = $i->amount;
 				break;
 			}
 		}
-		$tooltipString = $ingredientAmount.$ingredient['unit'];
-		$text = $ingredient['name'];
+		$tooltipString = $ingredientAmount.$ingredient->unit;
+		$text = $ingredient->name;
 		$tooltipHtml = "<a class='tooltip-btn' href='#'
 						data-toggle='tooltip' data-placement='top' title='$tooltipString'>
 						$text</a>";

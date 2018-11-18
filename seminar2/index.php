@@ -17,15 +17,15 @@ $pageContent = function () {
 	?>
 	<div class="featured-description px-5 py-4 py-sm-0 d-flex flex-column justify-content-center align-items-center">
 		<span class="mb-3">
-			<span class="recipe-title"><?php echo $featuredRecipe['title'];?></span>
+			<span class="recipe-title"><?php echo $featuredRecipe->title;?></span>
 		</span>
-		<p class="mb-5"><?php echo $featuredRecipe['shortDesc'];?></p>
-		<a class="btn btn-primary" href="<?php echo LINK_PATH . "recipe.php?recipe=" . $featuredRecipe['urlName']; ?>" role="button">
+		<p class="mb-5"><?php echo $featuredRecipe->shortDesc;?></p>
+		<a class="btn btn-primary" href="<?php echo LINK_PATH . "recipe.php?recipe=" . $featuredRecipe->urlName; ?>" role="button">
 			Cook this menu
 		</a>
 	</div>
 	<div id="recipe-hero" class="hero-img">
-		<img class="" src="media/<?php echo $featuredRecipe['heroImg'];?>" alt="<?php echo $featuredRecipe['name'];?>">
+		<img class="" src="media/<?php echo $featuredRecipe->heroImg;?>" alt="<?php echo $featuredRecipe->name;?>">
 	</div>
 	<?php
 };

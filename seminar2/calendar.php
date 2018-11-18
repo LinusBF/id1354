@@ -27,7 +27,7 @@ $pageContent = function () {
 	date_date_set($firstOfTheMonth, $_GET['year'], $_GET['month'], 1);
 
 	$filterByDate = function ($e) use ($firstOfTheMonth){
-		return $e['date'] == $firstOfTheMonth->format('Y-m-d');
+		return $e->date == $firstOfTheMonth->format('Y-m-d');
 	}
 	?>
 	<div class="calendar-wrapper w-100 px-5 d-flex flex-column justify-content-center align-items-center">
@@ -36,10 +36,10 @@ $pageContent = function () {
 
 				$recipeAtDate = array_filter($recipesByMonth, $filterByDate);
 				if(count($recipeAtDate) > 0):
-					$currentRecipe = $recipes[array_pop($recipeAtDate)['recipeId']];?>
+					$currentRecipe = $recipes[array_pop($recipeAtDate)->recipeId];?>
 				<li class="calendar-day recipe-on-day"
-					style="background-image: url('<?php echo LINK_PATH.'media/'.$currentRecipe['thumbImg'];?>')"
-					onclick="location.href='<?php echo LINK_PATH.'recipe.php?recipe='.$currentRecipe['urlName'];?>'">
+					style="background-image: url('<?php echo LINK_PATH.'media/'.$currentRecipe->thumbImg;?>')"
+					onclick="location.href='<?php echo LINK_PATH.'recipe.php?recipe='.$currentRecipe->urlName;?>'">
 				<?php else:?>
 				<li class="calendar-day">
 				<?php endif;?>
@@ -71,8 +71,8 @@ $sidebarContent = function () {
 			<h3 class="mb-3">Recipes of <?php echo $firstOfTheMonth->format("M");?>:</h3>
 			<?php foreach ($recipesByMonth as $recipe): ?>
 				<div class="recipe-link mb-3 d-inline">
-					<span><?php echo $recipe['date'];?>:</span>
-					<a href="<?php echo LINK_PATH."recipe.php?recipe=".$recipes[$recipe['recipeId']]['urlName']?>"><?php echo $recipes[$recipe['recipeId']]['title'] ?></a>
+					<span><?php echo $recipe->date;?>:</span>
+					<a href="<?php echo LINK_PATH."recipe.php?recipe=".$recipes[$recipe->recipeId]->urlName;?>"><?php echo $recipes[$recipe->recipeId]->title; ?></a>
 				</div>
 			<?php endforeach; ?>
 		</div>

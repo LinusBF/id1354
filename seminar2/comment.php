@@ -20,7 +20,7 @@ if($_POST['action'] === "AddComment"){
 
 	$comment = CommentController::create($_POST['content'], $_POST['recipeId'], $_SESSION['currentUser']);
 	$recipe = getRecipeById(intval($_POST['recipeId']));
-	$sRecipeUrl = LINK_PATH.'recipe.php?recipe='.$recipe['urlName'];
+	$sRecipeUrl = LINK_PATH.'recipe.php?recipe='.$recipe->urlName;
 
 	if($comment === false){
 		header("Location: $sRecipeUrl"."&comment-made=0");
@@ -39,7 +39,7 @@ if($_POST['action'] === "DeleteComment"){
 	$comment = CommentController::get($_POST['commentId']);
 	$result = CommentController::delete($_POST['commentId']);
 	$recipe = getRecipeById($comment->getRecipeId());
-	$sRecipeUrl = LINK_PATH.'recipe.php?recipe='.$recipe['urlName'];
+	$sRecipeUrl = LINK_PATH.'recipe.php?recipe='.$recipe->urlName;
 
 	if($result === false){
 		header("Location: $sRecipeUrl"."&comment-deleted=0");
