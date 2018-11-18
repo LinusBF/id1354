@@ -8,14 +8,14 @@
 DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar2/" : "/id1354/seminar2/");
 DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar2/" : str_replace("\\", "/", __DIR__)."/");
 
-include_once "./controllers/commentController.php";
+include_once "./controllers/recipeController.php";
+
+$recipeController = new RecipeController(RecipeController::USE_XML);
 
 ?>
 <pre>
 <?php
-var_dump($comment = CommentController::create("Test Comment", 1, 4));
+var_dump($recipeController->getRecipeByUrlName('meatballs'));
 ?>
 </pre>
 <?php
-
-var_dump(CommentController::get($comment->getId()));

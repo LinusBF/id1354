@@ -4,6 +4,8 @@ DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"].
 include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
 
+$recipeController = new RecipeController();
+
 $pageHeadTag = function () {
 	?>
 	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/index.css">
@@ -11,9 +13,9 @@ $pageHeadTag = function () {
 	<?php
 };
 
-$pageContent = function () {
-	$recipes = getRecipes();
-	$featuredRecipe = $recipes[getFeaturedId()];
+$pageContent = function () use (&$recipeController) {
+	$recipes = $recipeController->getRecipes();
+	$featuredRecipe = $recipes[$recipeController->getFeaturedId()];
 	?>
 	<div class="featured-description px-5 py-4 py-sm-0 d-flex flex-column justify-content-center align-items-center">
 		<span class="mb-3">

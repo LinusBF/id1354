@@ -12,6 +12,8 @@ if(!key_exists("action", $_POST)
 	die();
 }
 
+$recipeController = new RecipeController();
+
 if($_POST['action'] === "AddComment"){
 	if(!isset($_POST['recipeId']) || !isset($_POST['content'])){
 		header("Location: ".LINK_PATH.'index.php?comment-made=-1');
@@ -19,7 +21,7 @@ if($_POST['action'] === "AddComment"){
 	}
 
 	$comment = CommentController::create($_POST['content'], $_POST['recipeId'], $_SESSION['currentUser']);
-	$recipe = getRecipeById(intval($_POST['recipeId']));
+	$recipe = $recipeController->getRecipeById(intval($_POST['recipeId']));
 	$sRecipeUrl = LINK_PATH.'recipe.php?recipe='.$recipe->urlName;
 
 	if($comment === false){
@@ -38,7 +40,7 @@ if($_POST['action'] === "DeleteComment"){
 
 	$comment = CommentController::get($_POST['commentId']);
 	$result = CommentController::delete($_POST['commentId']);
-	$recipe = getRecipeById($comment->getRecipeId());
+	$recipe = $recipeController->getRecipeById($comment->getRecipeId());
 	$sRecipeUrl = LINK_PATH.'recipe.php?recipe='.$recipe->urlName;
 
 	if($result === false){

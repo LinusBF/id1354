@@ -11,6 +11,8 @@ include "./components/baseBody.php";
 include_once "./controllers/recipeController.php";
 include_once "./controllers/calendarController.php";
 
+$recipeController = new RecipeController();
+
 $pageHeadTag = function () {
 	if($_GET['month'] > 12) $_GET['month'] = 1;
 	if($_GET['month'] < 1) $_GET['month'] = 12;
@@ -20,8 +22,8 @@ $pageHeadTag = function () {
 	<?php
 };
 
-$pageContent = function () {
-	$recipes = getRecipes();
+$pageContent = function ()  use (&$recipeController) {
+	$recipes = $recipeController->getRecipes();
 	$recipesByMonth = getRecipesForMonth($_GET['year'], $_GET['month']);
 	$firstOfTheMonth = new DateTime();
 	date_date_set($firstOfTheMonth, $_GET['year'], $_GET['month'], 1);
@@ -52,8 +54,8 @@ $pageContent = function () {
 	<?php
 };
 
-$sidebarContent = function () {
-	$recipes = getRecipes();
+$sidebarContent = function () use (&$recipeController) {
+	$recipes = $recipeController->getRecipes();
 	$recipesByMonth = getRecipesForMonth($_GET['year'], $_GET['month']);
 
 	$firstOfTheMonth = new DateTime();

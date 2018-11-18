@@ -3,8 +3,10 @@
 include_once APP_PATH."controllers/recipeController.php";
 include_once APP_PATH."controllers/userController.php";
 
+
 function getMenu($sActive) {
-	$aRecipes = getRecipes();
+	$recipeController = new RecipeController();
+	$aRecipes = $recipeController->getRecipes();
 	$today = new DateTime();
 	$calendarDate = "?year=".$today->format("Y")."&month=".$today->format("m");
 	?>

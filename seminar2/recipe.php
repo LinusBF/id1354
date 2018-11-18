@@ -12,6 +12,8 @@ if(!key_exists("recipe", $_GET)){
 	die();
 }
 
+$recipeController = new RecipeController();
+
 $pageHeadTag = function () {
 	?>
 	<link rel="stylesheet" href="<?php echo LINK_PATH; ?>css/recipe.css">
@@ -20,10 +22,10 @@ $pageHeadTag = function () {
 	<?php
 };
 
-$pageContent = function () {
-	$ingredients = getIngredients();
+$pageContent = function () use (&$recipeController) {
+	$ingredients = $recipeController->getIngredients();
 
-	$currentRecipe = getRecipeByUrlName($_GET['recipe']);
+	$currentRecipe = $recipeController->getRecipeByUrlName($_GET['recipe']);
 	if ($currentRecipe !== false) :
 	?>
 	<div class="recipe-wrapper px-5 d-flex flex-column justify-content-center align-items-start">
@@ -40,7 +42,7 @@ $pageContent = function () {
 		<div class="instructions-wrapper">
 			<ul class="instructions-list">
 				<?php foreach ($currentRecipe->steps as $step): ?>
-					<li class="mb-2"><?php echo parseRecipeInstruction($step->instruction, $currentRecipe, $ingredients); ?></li>
+					<li class="mb-2"><?php echo RecipeController::parseRecipeInstruction($step->instruction, $currentRecipe, $ingredients); ?></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
@@ -60,8 +62,8 @@ $pageContent = function () {
 	endif;
 };
 
-$sidebarContent = function () {
-	$currentRecipe = getRecipeByUrlName($_GET['recipe']);
+$sidebarContent = function () use (&$recipeController) {
+	$currentRecipe = $recipeController->getRecipeByUrlName($_GET['recipe']);
 	if ($currentRecipe !== null):
 		$aComments = CommentController::getByRecipe($currentRecipe->id);
 	?>
