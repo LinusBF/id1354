@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cookbook xmlns="http://www.mycookbook-android.com"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.mycookbook-android.com ./mycookbook.xsd"
+          version="46">
+    <recipe>
+        <id>0</id>
+        <title>Glorious swedish meatballs</title>
+        <name>Meatballs</name>
+        <url>meatballs</url>
+        <heroImgUrl>meatballsHighRes.jpg</heroImgUrl>
+        <thumbImgUrl>meatballsThumb.jpg</thumbImgUrl>
+        <description>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+            </li>
+        </description>
+        <ingredient>
+            <ingredientData>
+                <id>0</id>
+                <amount>30</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>1</id>
+                <amount>1</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>2</id>
+                <amount>about 1</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>3</id>
+                <amount>about 1</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>4</id>
+                <amount>500</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>5</id>
+                <amount>1</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>6</id>
+                <amount>400</amount>
+            </ingredientData>
+        </ingredient>
+        <recipetext>
+            <li>Get all the ingredients...</li>
+            <li>Put the {4} in a large bowl.</li>
+            <li>Add the {0}, {2} &amp; {3} to the bowl and mix everything.</li>
+            <li>Add the {1} and {5} and mix again.</li>
+            <li>Roll your meatballs to your desired size.</li>
+        </recipetext>
+    </recipe>
+    <recipe>
+        <id>1</id>
+        <title>Amazingly simple pancakes</title>
+        <name>Pancakes</name>
+        <url>pancakes</url>
+        <heroImgUrl>meatballsHighRes.jpg</heroImgUrl>
+        <thumbImgUrl>meatballsThumb.jpg</thumbImgUrl>
+        <description>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+            </li>
+        </description>
+        <ingredient>
+            <ingredientData>
+                <id>0</id>
+                <amount>150</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>1</id>
+                <amount>3</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>2</id>
+                <amount>about 0.5</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>7</id>
+                <amount>500</amount>
+            </ingredientData>
+            <ingredientData>
+                <id>8</id>
+                <amount>1</amount>
+            </ingredientData>
+        </ingredient>
+        <recipetext>
+            <li>Get all the ingredients...</li>
+            <li>Combine the dry ingredients ({0} and {2}) into a large bowl.</li>
+            <li>Stir in half of the {7} until the mixture is smooth.</li>
+            <li>Add the rest of the {7} and stir in the {1}.</li>
+            <li>Melt the {8} in a pan and add to the batter.</li>
+            <li>Fry thin pancakes in a frying pan. Serve with strawberries and whip cream.</li>
+        </recipetext>
+    </recipe>
+</cookbook>
