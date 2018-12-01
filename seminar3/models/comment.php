@@ -8,39 +8,50 @@
 
 class Comment {
 
-	protected $iCommentID;
-	protected $iRecipeID;
-	protected $iAuthorID;
+	private $commentIntegration;
+	protected $commentId;
+	protected $recipeId;
+	protected $authorId;
 	public $sContent;
 	public $dateCreated;
 
 	/**
-	 * Account constructor.
+	 * Comment constructor.
 	 *
-	 * @param string $sContent
-	 * @param int $iRecipeID
-	 * @param int $iAuthorID
-	 * @param int $iCommentID
-	 * @param DateTime $created
+	 * @param $id
 	 */
-	public function __construct($sContent, $iRecipeID, $iAuthorID, $iCommentID = null, $created = null) {
-		$this->sContent = $sContent;
-		$this->iRecipeID = $iRecipeID;
-		$this->iAuthorID = $iAuthorID;
-		$this->iCommentID = $iCommentID;
-		$this->dateCreated = $created;
+	public function __construct( $id = null ) {
+		$this->commentId          = $id;
+		$this->commentIntegration = new CommentTable();
+		if($id !== null){
+			$this->gatherDataFromStore();
+		}
+	}
+
+	private function gatherDataFromStore() {
+		$recipeData = $this->commentIntegration->getComment($this->commentId);
+		if($recipeData === false) return;
+		$this->sContent    = $recipeData['content'];
+		$this->recipeId    = $recipeData['recipe'];
+		$this->authorId    = $recipeData['author'];
+		$this->commentId   = $recipeData['id'];
+		$this->dateCreated = $recipeData['created'];
+	}
+
+	public function fillWithData($dbResult){
+
 	}
 
 	public function getId(){
-		return $this->iCommentID;
+		return $this->commentId;
 	}
 
 	public function getRecipeId(){
-		return $this->iRecipeID;
+		return $this->recipeId;
 	}
 
 	public function getAuthorId(){
-		return $this->iAuthorID;
+		return $this->authorId;
 	}
 
 	public function getContent(){
@@ -57,14 +68,14 @@ class Comment {
 	 * @return bool
 	 */
 	public function equalTo($comment){
-		return ($this->iCommentID !== null && $comment->iCommentID !== null) && $this->iCommentID === $comment->iCommentID;
+		return ( $this->commentId !== null && $comment->commentId !== null) && $this->commentId === $comment->commentId;
 	}
 
 	public function toDbParams(){
 		return array(
-			"ID" => $this->iCommentID,
-			"recipe" => $this->iRecipeID,
-			"author" => $this->iAuthorID,
+			"ID" => $this->commentId,
+			"recipe" => $this->recipeId,
+			"author" => $this->authorId,
 			"content" => $this->sContent,
 			"created" => $this->dateCreated
 		);

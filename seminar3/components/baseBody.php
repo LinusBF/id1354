@@ -2,8 +2,6 @@
 include APP_PATH."components/menu.php";
 include APP_PATH."components/errorHandler.php";
 
-session_start();
-
 /**
  * @param string $pageName
  * @param iViewTemplate $view

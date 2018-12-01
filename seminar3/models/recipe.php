@@ -6,7 +6,11 @@
  * Time: 04:26
  */
 
+require_once APP_PATH.'integration/recipeTable.php';
+
 class Recipe {
+	private $recipeIntegration;
+	private $commentIntegration;
 	public $id;
 	public $name;
 	public $title;
@@ -16,35 +20,64 @@ class Recipe {
 	public $thumbImg;
 	public $ingredients;
 	public $steps;
+	public $comments;
 
 	/**
 	 * Recipe constructor.
 	 *
 	 * @param $id
-	 * @param $name
-	 * @param $title
-	 * @param $description
-	 * @param $urlName
-	 * @param $heroImg
-	 * @param $thumbImg
-	 * @param $ingredients
-	 * @param $steps
 	 */
-	public function __construct( $id, $name, $title, $description, $urlName, $heroImg, $thumbImg, $ingredients, $steps ) {
-		$this->id          = $id;
-		$this->name        = $name;
-		$this->title       = $title;
-		$this->description = $description;
-		$this->urlName     = $urlName;
-		$this->heroImg     = $heroImg;
-		$this->thumbImg    = $thumbImg;
-		$this->ingredients = $this->parseDbArray($ingredients);
-		$this->steps       = $this->parseDbArray($steps);
+	public function __construct( $id = null ) {
+		$this->id                = $id;
+		$this->recipeIntegration = new RecipeTable();
+		$this->commentIntegration = new CommentTable();
+		$this->comments = [];
+		if($id !== null){
+			$this->gatherDataFromStore();
+		}
+	}
+
+	private function gatherDataFromStore() {
+		$recipeData = $this->recipeIntegration->getRecipeData($this->id);
+		if($recipeData === false) return;
+		$this->recipeFromDbData($recipeData);
+	}
+
+	private function recipeFromDbData($recipeData){
+		$this->id          = $recipeData['ID'];
+		$this->name        = $recipeData['name'];
+		$this->title       = $recipeData['title'];
+		$this->description = $recipeData['description'];
+		$this->urlName     = $recipeData['urlName'];
+		$this->heroImg     = $recipeData['heroImg'];
+		$this->thumbImg    = $recipeData['thumbImg'];
+		$this->ingredients = $this->parseDbArray($recipeData['ingredients']);
+		$this->steps       = $this->parseDbArray($recipeData['steps']);
 	}
 
 	private function parseDbArray($arrayStr){
 		$parsed = json_decode($arrayStr, false);
 		return $parsed;
+	}
+
+	/**
+	 * @param Comment[] $comments
+	 */
+	public function setComments($comments){
+		$this->comments = $comments;
+	}
+
+	public static function getAllRecipes(){
+		$recipes = array();
+		$integration = new RecipeTable();
+		$recipesData = $integration->getAllRecipeData();
+		foreach ($recipesData as $recipeData){
+			$recipe = new Recipe();
+			$recipe->recipeFromDbData($recipeData);
+			array_push($recipes, $recipe);
+		}
+
+		return $recipes;
 	}
 
 }

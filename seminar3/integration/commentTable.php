@@ -109,7 +109,7 @@ class CommentTable {
 	/**
 	 * @param int $iCommentId
 	 *
-	 * @return bool|Comment
+	 * @return bool|array
 	 */
 	public function getComment($iCommentId){
 		$sQuery = "SELECT * FROM ".$this::TABLE_NAME." WHERE ID = ?";
@@ -124,13 +124,13 @@ class CommentTable {
 
 		$aCommentData = $result[0];
 
-		return new Comment($aCommentData['content'], $aCommentData['recipe'], $aCommentData['author'], $aCommentData['ID'], $aCommentData['created']);
+		return $aCommentData;
 	}
 
 	/**
 	 * @param int $iUserId
 	 *
-	 * @return bool|Comment[]
+	 * @return bool|array[]
 	 */
 	public function getCommentsByUser($iUserId){
 		$sQuery = "SELECT * FROM ".$this::TABLE_NAME." WHERE author = ?";
@@ -145,7 +145,7 @@ class CommentTable {
 
 		$aComments = array();
 		foreach ($result as $aCommentData){
-			array_push($aComments, new Comment($aCommentData['content'], $aCommentData['recipe'], $aCommentData['author'], $aCommentData['ID'], $aCommentData['created']));
+			array_push($aComments, $aCommentData);
 		}
 
 		return $aComments;
@@ -154,7 +154,7 @@ class CommentTable {
 	/**
 	 * @param int $iRecipeId
 	 *
-	 * @return bool|Comment[]
+	 * @return bool|array[]
 	 */
 	public function getCommentsByRecipe($iRecipeId){
 		$sQuery = "SELECT * FROM ".$this::TABLE_NAME." WHERE recipe = ?";
@@ -169,7 +169,7 @@ class CommentTable {
 
 		$aComments = array();
 		foreach ($result as $aCommentData){
-			array_push($aComments, new Comment($aCommentData['content'], $aCommentData['recipe'], $aCommentData['author'], $aCommentData['ID'], $aCommentData['created']));
+			array_push($aComments, $aCommentData);
 		}
 
 		return $aComments;

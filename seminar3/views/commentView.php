@@ -11,7 +11,7 @@ function printComment($comment, $author){
 			<h5 class="text-info"><?php echo $author->getName(); ?></h5>
 			<?php if(isset($_SESSION['currentUser']) && $_SESSION['currentUser'] === $comment->getAuthorId()):?>
 			<form class="d-none" id="delComment<?php echo $comment->getId(); ?>"
-				action="<?php echo LINK_PATH."comment.php";?>" method="POST">
+				action="<?php echo LINK_PATH."recipe.php";?>" method="GET">
 				<input type="hidden" name="action" value="DeleteComment">
 				<input type="hidden" name="commentId" value="<?php echo $comment->getId(); ?>">
 			</form>

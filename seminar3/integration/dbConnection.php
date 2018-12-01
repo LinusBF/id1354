@@ -74,14 +74,16 @@ class dbConnection {
 		$connection = $this->newConnection();
 		$stmt = $connection->prepare($sQuery);
 
-		$aWildcardTypes = array_map(function($i) {
-			return $i[0];
-		}, $aToBind);
-		$aWildcardValues = array_map(function($i) {
-			return $i[1];
-		}, $aToBind);
+		if(isset($aToBind) && count($aToBind) > 0) {
+			$aWildcardTypes  = array_map( function ( $i ) {
+				return $i[0];
+			}, $aToBind );
+			$aWildcardValues = array_map( function ( $i ) {
+				return $i[1];
+			}, $aToBind );
 
-		$stmt->bind_param(implode("", $aWildcardTypes), ...$aWildcardValues);
+			$stmt->bind_param( implode( "", $aWildcardTypes ), ...$aWildcardValues );
+		}
 
 		$executionStatus = $stmt->execute();
 

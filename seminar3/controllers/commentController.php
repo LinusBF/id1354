@@ -17,7 +17,7 @@ class CommentController {
 	 *
 	 * @return bool|Comment
 	 */
-	public static function create($sContent, $iRecipeId, $iAuthorID){
+	public function createComment($sContent, $iRecipeId, $iAuthorID){
 		$comment = new Comment($sContent, $iRecipeId, $iAuthorID);
 		$commentDB = new CommentTable();
 
@@ -30,7 +30,7 @@ class CommentController {
 		return CommentController::get($iCommentId);
 	}
 
-	public static function delete($iCommentId){
+	public function deleteComment($iCommentId){
 		$comment = CommentController::get($iCommentId);
 		if($_SESSION['currentUser'] === $comment->getAuthorId()){
 			$commentDB = new CommentTable();
@@ -45,7 +45,7 @@ class CommentController {
 	 *
 	 * @return Comment
 	 */
-	public static function get($iCommentId){
+	public function getComment($iCommentId){
 		$commentDB = new CommentTable();
 
 		return $commentDB->getComment($iCommentId);
@@ -56,7 +56,7 @@ class CommentController {
 	 *
 	 * @return Comment[]
 	 */
-	public static function getByAuthor($iUserId){
+	public function getCommentsByAuthor($iUserId){
 		$commentDB = new CommentTable();
 
 		return $commentDB->getCommentsByUser($iUserId);
@@ -67,7 +67,7 @@ class CommentController {
 	 *
 	 * @return Comment[]
 	 */
-	public static function getByRecipe($iRecipeId){
+	public function getCommentsByRecipe($iRecipeId){
 		$commentDB = new CommentTable();
 
 		return $commentDB->getCommentsByRecipe($iRecipeId);

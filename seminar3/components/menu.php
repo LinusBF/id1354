@@ -1,12 +1,11 @@
 <?php
 
-include_once APP_PATH."controllers/recipeController.php";
+include_once APP_PATH."models/recipe.php";
 include_once APP_PATH."controllers/userController.php";
 
 
 function getMenu($sActive) {
-	$recipeController = new RecipeController();
-	$aRecipes = $recipeController->getRecipes();
+	$aRecipes = Recipe::getAllRecipes();
 	$today = new DateTime();
 	$calendarDate = "?year=".$today->format("Y")."&month=".$today->format("m");
 	?>
