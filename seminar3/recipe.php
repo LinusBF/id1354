@@ -1,6 +1,6 @@
 <?php
-include_once "./controllers/recipeController.php";
-include_once "./views/recipeView.php";
+include_once APP_PATH."controllers/recipeController.php";
+include_once APP_PATH."views/recipeView.php";
 
 if(!key_exists("recipe", $_GET)){
 	header("Location: ".LINK_PATH.'index.php');

@@ -69,7 +69,16 @@ class CommentController {
 	 */
 	public function getCommentsByRecipe($iRecipeId){
 		$commentDB = new CommentTable();
+		$comments = array();
 
-		return $commentDB->getCommentsByRecipe($iRecipeId);
+		$commentsData = $commentDB->getCommentsByRecipe($iRecipeId);
+
+		foreach ($commentsData as $commentData){
+			$comment = new Comment();
+			$comment->fillWithData($commentData);
+			array_push($comments, $comment);
+		}
+
+		return $comments;
 	}
 }

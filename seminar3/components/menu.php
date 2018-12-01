@@ -1,13 +1,13 @@
 <?php
 
 include_once APP_PATH."models/recipe.php";
-include_once APP_PATH."controllers/userController.php";
+include_once APP_PATH."models/user.php";
 
 
 function getMenu($sActive) {
 	$aRecipes = Recipe::getAllRecipes();
 	$today = new DateTime();
-	$calendarDate = "?year=".$today->format("Y")."&month=".$today->format("m");
+	$calendarDate = "year=".$today->format("Y")."&month=".$today->format("m");
 	?>
 	<nav class="navbar navbar-expand-sm navbar-dark main-nav">
 		<a class="navbar-brand" href="<?php echo LINK_PATH . "index.php";?>">TastyRecipes.com</a>
@@ -25,14 +25,14 @@ function getMenu($sActive) {
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<?php foreach ($aRecipes as $recipe):?>
-							<a class="dropdown-item" href="<?php echo LINK_PATH . "recipe.php?recipe=" . $recipe->urlName; ?>">
+							<a class="dropdown-item" href="<?php echo $recipe->getRecipeUrl(); ?>">
 								<?php echo $recipe->name; ?>
 							</a>
 						<?php endforeach;?>
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link <?php echo ($sActive === "calendar" ? "active" : "")?>" href="<?php echo LINK_PATH . "calendar.php".$calendarDate;?>">
+					<a class="nav-link <?php echo ($sActive === "calendar" ? "active" : "")?>" href="<?php echo LINK_PATH . "index.php?page=calendar&".$calendarDate;?>">
 						Calendar
 					</a>
 				</li>
@@ -47,7 +47,7 @@ function getUserMenu(){
 	<nav class="navbar navbar-expand-sm navbar-dark user-nav">
 	<?php
 	if(isset($_SESSION['currentUser'])):
-	$loggedInUser = UserController::get($_SESSION['currentUser']);?>
+	$loggedInUser = User::getLoggedInUser();?>
 		<ul class="navbar-nav w-100 d-flex flex-row justify-content-between">
 			<li class="nav-item">
 				<a class="nav-link text-success" href="<?php echo LINK_PATH . "user.php?userId=" . $loggedInUser->getId(); ?>">

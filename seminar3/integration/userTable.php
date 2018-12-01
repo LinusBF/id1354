@@ -98,7 +98,7 @@ class UserTable {
 	/**
 	 * @param $iUserId
 	 *
-	 * @return User
+	 * @return array
 	 */
 	public function getUser($iUserId){
 		$sQuery = "SELECT * FROM ".$this::TABLE_NAME." WHERE ID = ?";
@@ -108,13 +108,13 @@ class UserTable {
 		$result = $DB->runQuery($sQuery, $aToBind);
 		$aUserData = $result[0];
 
-		return new User($aUserData['username'], $aUserData['email'], $aUserData['password'], $aUserData['ID']);
+		return $aUserData;
 	}
 
 	/**
 	 * @param $sUserName
 	 *
-	 * @return User
+	 * @return array
 	 */
 	public function getUserByName($sUserName){
 		$sQuery = "SELECT * FROM ".$this::TABLE_NAME." WHERE username = ?";
@@ -124,7 +124,7 @@ class UserTable {
 		$result = $DB->runQuery($sQuery, $aToBind);
 		$aUserData = $result[0];
 
-		return new User($aUserData['username'], $aUserData['email'], $aUserData['password'], $aUserData['ID']);
+		return $aUserData;
 	}
 
 }

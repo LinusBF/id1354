@@ -10,7 +10,6 @@ require_once APP_PATH.'integration/recipeTable.php';
 
 class Recipe {
 	private $recipeIntegration;
-	private $commentIntegration;
 	public $id;
 	public $name;
 	public $title;
@@ -30,14 +29,13 @@ class Recipe {
 	public function __construct( $id = null ) {
 		$this->id                = $id;
 		$this->recipeIntegration = new RecipeTable();
-		$this->commentIntegration = new CommentTable();
 		$this->comments = [];
 		if($id !== null){
-			$this->gatherDataFromStore();
+			$this->gatherDataFromStorage();
 		}
 	}
 
-	private function gatherDataFromStore() {
+	private function gatherDataFromStorage() {
 		$recipeData = $this->recipeIntegration->getRecipeData($this->id);
 		if($recipeData === false) return;
 		$this->recipeFromDbData($recipeData);
@@ -67,6 +65,20 @@ class Recipe {
 		$this->comments = $comments;
 	}
 
+	/**
+	 * @return Comment[]
+	 */
+	public function getComments(): array {
+		return $this->comments;
+	}
+
+	public function getRecipeUrl(){
+		return LINK_PATH."index.php?page=recipe&recipe=".$this->id;
+	}
+
+	/**
+	 * @return Recipe[]
+	 */
 	public static function getAllRecipes(){
 		$recipes = array();
 		$integration = new RecipeTable();

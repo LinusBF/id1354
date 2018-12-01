@@ -12,8 +12,9 @@ include_once APP_PATH."utils/navigationHelper.php";
 				</button>
 			</div>
 			<div class="modal-body">
-				<form id="userForm" method="POST" action="<?php echo LINK_PATH . "user.php";?>">
+				<form id="userForm" method="POST" action="<?php echo LINK_PATH . "index.php?page=user&action=register";?>">
 					<input type="hidden" name="action" value="CreateUser">
+					<input type="hidden" name="callee" value="<?php echo (isset($_GET['page']) ? $_GET['page'] : 'home'); ?>">
 					<div class="form-group">
 						<label for="userName">Username</label>
 						<input type="text" class="form-control" id="userName" name="username" placeholder="Enter username">
@@ -46,9 +47,9 @@ include_once APP_PATH."utils/navigationHelper.php";
 				</button>
 			</div>
 			<div class="modal-body">
-				<form id="loginForm" method="POST" action="<?php echo LINK_PATH . "user.php";?>">
+				<form id="loginForm" method="POST" action="<?php echo LINK_PATH . "index.php?page=user&action=login";?>">
 					<input type="hidden" name="action" value="LoginUser">
-					<input type="hidden" name="callee" value="<?php echo full_url($_SERVER) ?>">
+					<input type="hidden" name="callee" value="<?php echo (isset($_GET['page']) ? $_GET['page'] : 'home'); ?>">
 					<div class="form-group">
 						<label for="userName">Username</label>
 						<input type="text" class="form-control" id="userName" name="username" placeholder="Enter username">

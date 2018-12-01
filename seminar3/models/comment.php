@@ -29,17 +29,21 @@ class Comment {
 	}
 
 	private function gatherDataFromStore() {
-		$recipeData = $this->commentIntegration->getComment($this->commentId);
-		if($recipeData === false) return;
-		$this->sContent    = $recipeData['content'];
-		$this->recipeId    = $recipeData['recipe'];
-		$this->authorId    = $recipeData['author'];
-		$this->commentId   = $recipeData['id'];
-		$this->dateCreated = $recipeData['created'];
+		$commentData = $this->commentIntegration->getComment($this->commentId);
+		if($commentData === false) return;
+		$this->sContent    = $commentData['content'];
+		$this->recipeId    = $commentData['recipe'];
+		$this->authorId    = $commentData['author'];
+		$this->commentId   = $commentData['ID'];
+		$this->dateCreated = $commentData['created'];
 	}
 
-	public function fillWithData($dbResult){
-
+	public function fillWithData($commentData){
+		$this->sContent    = $commentData['content'];
+		$this->recipeId    = $commentData['recipe'];
+		$this->authorId    = $commentData['author'];
+		$this->commentId   = $commentData['ID'];
+		$this->dateCreated = $commentData['created'];
 	}
 
 	public function getId(){
