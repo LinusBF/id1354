@@ -8,7 +8,7 @@
 
 class IngredientList {
 	public static function getAllIngredients(){
-		$data = json_decode(file_get_contents(APP_PATH."data/recipes.json"), false);
+		$data = json_decode(file_get_contents(APP_PATH."data/ingredients.json"), false);
 		return $data->ingredients;
 	}
 }

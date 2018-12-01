@@ -6,7 +6,7 @@
  * Time: 04:26
  */
 
-require_once APP_PATH.'integration/recipeTable.php';
+require_once APP_PATH.'integration/recipeIntegration.php';
 
 class Recipe {
 	private $recipeIntegration;
@@ -28,7 +28,7 @@ class Recipe {
 	 */
 	public function __construct( $id = null ) {
 		$this->id                = $id;
-		$this->recipeIntegration = new RecipeTable();
+		$this->recipeIntegration = new RecipeIntegration();
 		$this->comments = [];
 		if($id !== null){
 			$this->gatherDataFromStorage();
@@ -81,7 +81,7 @@ class Recipe {
 	 */
 	public static function getAllRecipes(){
 		$recipes = array();
-		$integration = new RecipeTable();
+		$integration = new RecipeIntegration();
 		$recipesData = $integration->getAllRecipeData();
 		foreach ($recipesData as $recipeData){
 			$recipe = new Recipe();

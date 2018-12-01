@@ -22,7 +22,7 @@ class Comment {
 	 */
 	public function __construct( $id = null ) {
 		$this->commentId          = $id;
-		$this->commentIntegration = new CommentTable();
+		$this->commentIntegration = new CommentIntegration();
 		if($id !== null){
 			$this->gatherDataFromStorage();
 		}
@@ -61,14 +61,6 @@ class Comment {
 		return $this->authorId;
 	}
 
-	public function getContent(){
-		return $this->sContent;
-	}
-
-	public function getCreated(){
-		return $this->dateCreated;
-	}
-
 	public function saveToStorage(){
 		$commentId = $this->commentIntegration->putComment($this);
 		return $commentId;
@@ -77,15 +69,6 @@ class Comment {
 	public function deleteFromStorage(){
 		$result = $this->commentIntegration->deleteComment($this->commentId);
 		return $result;
-	}
-
-	/**
-	 * @param Comment $comment
-	 *
-	 * @return bool
-	 */
-	public function equalTo($comment){
-		return ( $this->commentId !== null && $comment->commentId !== null) && $this->commentId === $comment->commentId;
 	}
 
 	public function toDbParams(){

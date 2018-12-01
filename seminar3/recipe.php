@@ -7,8 +7,8 @@ if(!key_exists("recipe", $_GET)){
 	die();
 }
 
-$controller = new RecipeController();
-$recipe = $controller->getRecipeFromStorage($_GET['recipe']);
+$recipe = new Recipe($_GET['recipe']);
+$controller = new RecipeController($recipe);
 $view = new RecipeView($controller, $recipe);
 
 if (isset($_GET['action']) && !empty($_GET['action'])) {

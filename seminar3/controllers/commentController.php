@@ -7,7 +7,7 @@
  */
 
 include_once APP_PATH."models/comment.php";
-include_once APP_PATH."integration/commentTable.php";
+include_once APP_PATH."integration/commentIntegration.php";
 
 class CommentController {
 
@@ -63,34 +63,12 @@ class CommentController {
 	}
 
 	/**
-	 * @param $iCommentId
-	 *
-	 * @return Comment
-	 */
-	public function getComment($iCommentId){
-		$commentDB = new CommentTable();
-
-		return $commentDB->getComment($iCommentId);
-	}
-
-	/**
-	 * @param $iUserId
-	 *
-	 * @return Comment[]
-	 */
-	public function getCommentsByAuthor($iUserId){
-		$commentDB = new CommentTable();
-
-		return $commentDB->getCommentsByUser($iUserId);
-	}
-
-	/**
 	 * @param $iRecipeId
 	 *
 	 * @return Comment[]
 	 */
 	public function getCommentsByRecipe($iRecipeId){
-		$commentDB = new CommentTable();
+		$commentDB = new CommentIntegration();
 		$comments = array();
 
 		$commentsData = $commentDB->getCommentsByRecipe($iRecipeId);

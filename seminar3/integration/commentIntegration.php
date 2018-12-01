@@ -8,10 +8,10 @@
 
 include_once APP_PATH."integration/dbConnection.php";
 
-class CommentTable {
+class CommentIntegration {
 	private const TABLE_NAME = "comment";
 	private const TABLE_SQL = "	
-		CREATE TABLE ".CommentTable::TABLE_NAME." (
+		CREATE TABLE " . CommentIntegration::TABLE_NAME . " (
 		 `ID` int(11) NOT NULL AUTO_INCREMENT,
 		 `recipe` int(11) NOT NULL,
 		 `author` int(11) NOT NULL,
@@ -24,7 +24,7 @@ class CommentTable {
 
 	public function __construct() {
 		$DB = new dbConnection();
-		$DB->migrateTable(CommentTable::TABLE_NAME, CommentTable::TABLE_SQL);
+		$DB->migrateTable(CommentIntegration::TABLE_NAME, CommentIntegration::TABLE_SQL);
 	}
 
 	/**
@@ -65,35 +65,8 @@ class CommentTable {
 	}
 
 	private function updateComment($aCommentParams){
-		$userId = $aCommentParams['ID'];
-		unset($aCommentParams['ID']);
-		$aSets = array();
-
-		foreach (array_keys($aCommentParams) as $key){
-			array_push($aSets, $key." = "."?");
-		}
-
-		$sSetString = implode(", ", $aSets);
-
-		$sQuery = "UPDATE ".$this::TABLE_NAME." SET $sSetString WHERE ID = ?";
-		$aToBind = array();
-
-		foreach (array_values($aCommentParams) as $value){
-			$wildcard = "s";
-			if(gettype($value) === "integer"){
-				$wildcard = "i";
-			}
-			else if(gettype($value) === "double"){
-				$wildcard = "d";
-			}
-			array_push($aToBind, array($wildcard, $value));
-		}
-
-		//Add user ID to WHERE wildcard
-		array_push($aToBind, array("i", $userId));
-
-		$DB = new dbConnection();
-		return $DB->runQuery($sQuery, $aToBind);
+		/* NOT IMPLEMENTED */
+		return 0;
 	}
 
 	public function deleteComment($iCommentId){
@@ -125,30 +98,6 @@ class CommentTable {
 		$aCommentData = $result[0];
 
 		return $aCommentData;
-	}
-
-	/**
-	 * @param int $iUserId
-	 *
-	 * @return bool|array[]
-	 */
-	public function getCommentsByUser($iUserId){
-		$sQuery = "SELECT * FROM ".$this::TABLE_NAME." WHERE author = ?";
-		$aToBind = array(array("i", $iUserId));
-
-		$DB = new dbConnection();
-		$result = $DB->runQuery($sQuery, $aToBind);
-
-		if($result === false){
-			return false;
-		}
-
-		$aComments = array();
-		foreach ($result as $aCommentData){
-			array_push($aComments, $aCommentData);
-		}
-
-		return $aComments;
 	}
 
 	/**

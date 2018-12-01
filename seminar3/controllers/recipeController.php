@@ -6,19 +6,14 @@ require_once APP_PATH.'models/recipe.php';
 class RecipeController{
 	private $commentController;
 
-	public function __construct() {
-		$this->commentController = new CommentController();
-	}
-
 	/**
-	 * @param $id
+	 * RecipeController constructor.
 	 *
-	 * @return Recipe
+	 * @param Recipe $recipe
 	 */
-	public function getRecipeFromStorage($id){
-		$recipe = new Recipe($id);
-		$comments = $this->commentController->getCommentsByRecipe($id);
+	public function __construct($recipe) {
+		$this->commentController = new CommentController();
+		$comments = $this->commentController->getCommentsByRecipe($recipe->id);
 		$recipe->setComments($comments);
-		return $recipe;
 	}
 }

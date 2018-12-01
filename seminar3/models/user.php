@@ -6,7 +6,7 @@
  * Time: 17:53
  */
 
-require_once APP_PATH.'integration/userTable.php';
+require_once APP_PATH.'integration/userIntegration.php';
 
 class User {
 
@@ -23,7 +23,7 @@ class User {
 	 */
 	public function __construct($name = null) {
 		$this->username                = $name;
-		$this->userIntegration = new UserTable();
+		$this->userIntegration = new UserIntegration();
 		if($name !== null){
 			$this->gatherDataFromStorage();
 		}
@@ -63,19 +63,6 @@ class User {
 		return $this->username;
 	}
 
-	public function getEmail(){
-		return $this->email;
-	}
-
-	/**
-	 * @param User $uUser
-	 *
-	 * @return bool
-	 */
-	public function equalTo($uUser){
-		return ($this->id !== null && $uUser->id !== null) && $this->id === $uUser->id;
-	}
-
 	public function toDbParams(){
 		return array(
 			"ID" => $this->id,
@@ -90,7 +77,7 @@ class User {
 	}
 
 	public static function getLoggedInUser(){
-		$integration = new UserTable();
+		$integration = new UserIntegration();
 		$userData = $integration->getUser($_SESSION['currentUser']);
 		$loggedInUser = new User();
 		$loggedInUser->userFromDbData($userData);
@@ -103,7 +90,7 @@ class User {
 	 * @return User
 	 */
 	public static function getAuthorToComment($comment){
-		$integration = new UserTable();
+		$integration = new UserIntegration();
 		$userData = $integration->getUser($comment->getAuthorId());
 		$authorUser = new User();
 		$authorUser->userFromDbData($userData);

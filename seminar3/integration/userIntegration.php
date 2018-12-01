@@ -8,10 +8,10 @@
 
 include_once APP_PATH."integration/dbConnection.php";
 
-class UserTable {
+class UserIntegration {
 	private const TABLE_NAME = "user";
 	private const TABLE_SQL = "	
-		CREATE TABLE ".UserTable::TABLE_NAME." (
+		CREATE TABLE " . UserIntegration::TABLE_NAME . " (
 		 `ID` int(11) NOT NULL AUTO_INCREMENT,
 		 `username` varchar(255) NOT NULL UNIQUE,
 		 `email` varchar(255) NOT NULL UNIQUE,
@@ -22,7 +22,7 @@ class UserTable {
 	public function __construct() {
 		$DB = new dbConnection();
 		if($DB === false) return false;
-		$migrated = $DB->migrateTable(UserTable::TABLE_NAME, UserTable::TABLE_SQL);
+		$migrated = $DB->migrateTable(UserIntegration::TABLE_NAME, UserIntegration::TABLE_SQL);
 		if(!$migrated) return false;
 	}
 
@@ -64,35 +64,8 @@ class UserTable {
 	}
 
 	private function updateUser($aUserParams){
-		$userId = $aUserParams['ID'];
-		unset($aUserParams['ID']);
-		$aSets = array();
-
-		foreach (array_keys($aUserParams) as $key){
-			array_push($aSets, $key." = "."?");
-		}
-
-		$sSetString = implode(", ", $aSets);
-
-		$sQuery = "UPDATE ".$this::TABLE_NAME." SET $sSetString WHERE ID = ?";
-		$aToBind = array();
-
-		foreach (array_values($aUserParams) as $value){
-			$wildcard = "s";
-			if(gettype($value) === "integer"){
-				$wildcard = "i";
-			}
-			else if(gettype($value) === "double"){
-				$wildcard = "d";
-			}
-			array_push($aToBind, array($wildcard, $value));
-		}
-
-		//Add user ID to WHERE wildcard
-		array_push($aToBind, array("i", $userId));
-
-		$DB = new dbConnection();
-		return $DB->runQuery($sQuery, $aToBind);
+		/* NOT IMPLEMENTED */
+		return 0;
 	}
 
 	/**

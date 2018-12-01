@@ -1,0 +1,40 @@
+{
+  "ingredients": [
+    {
+      "name": "Flour",
+      "unit": "g"
+    },
+    {
+      "name": "Eggs",
+      "unit": ""
+    },
+    {
+      "name": "Salt",
+      "unit": "tsp"
+    },
+    {
+      "name": "Pepper",
+      "unit": "tsp"
+    },
+    {
+      "name": "Minced Beef",
+      "unit": "g"
+    },
+    {
+      "name": "Worchestire Sauce",
+      "unit": "tbs"
+    },
+    {
+      "name": "Crushed Tomatoes",
+      "unit": "g"
+    },
+    {
+      "name": "Milk",
+      "unit": "dl"
+    },
+    {
+      "name": "Butter",
+      "unit": "g"
+    }
+  ]
+}

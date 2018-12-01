@@ -156,18 +156,20 @@ class RecipeView implements iViewTemplate {
 	}
 
 	public function show() {
-		BaseView::printBody( 'recipe', array( $this, 'pageHeadTag' ), array( $this, 'pageContent' ), array(
-			$this,
-			'sidebarContent'
-		) );
+		BaseView::printBody(
+				'recipe',
+				array( $this, 'pageHeadTag' ),
+				array( $this, 'pageContent' ),
+				array( $this, 'sidebarContent' )
+		);
 	}
 
 	public function index() {
 		BaseView::printBody(
-'index',
-			array( $this, 'pageHeadTagIndex' ),
-			array( $this, 'pageContentIndex' ),
-			array( $this, 'sidebarContentIndex' )
+				'index',
+				array( $this, 'pageHeadTagIndex' ),
+				array( $this, 'pageContentIndex' ),
+				array( $this, 'sidebarContentIndex' )
 		);
 	}
 

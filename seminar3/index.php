@@ -7,8 +7,8 @@ include_once APP_PATH."views/recipeView.php";
 session_start();
 
 function indexPage() {
-	$controller = new RecipeController();
-	$recipe = $controller->getRecipeFromStorage(1);
+	$recipe = new Recipe(1);
+	$controller = new RecipeController($recipe);
 	$view = new RecipeView($controller, $recipe);
 	$view->index();
 }
@@ -32,4 +32,3 @@ if(isset($page)){
 else {
 	indexPage();
 }
-?>

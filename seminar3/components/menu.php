@@ -50,12 +50,12 @@ function getUserMenu(){
 	$loggedInUser = User::getLoggedInUser();?>
 		<ul class="navbar-nav w-100 d-flex flex-row justify-content-between">
 			<li class="nav-item">
-				<a class="nav-link text-success" href="<?php echo LINK_PATH . "user.php?userId=" . $loggedInUser->getId(); ?>">
+				<a class="nav-link text-success" href="<?php echo LINK_PATH . "index.php?page=user&userId=" . $loggedInUser->getId(); ?>">
 					<?php echo $loggedInUser->getName(); ?>
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link text-warning" href="<?php echo LINK_PATH . "user.php?logout=1"; ?>">
+				<a class="nav-link text-warning" href="<?php echo LINK_PATH . "index.php?page=user&action=logout"; ?>">
 					Logout
 				</a>
 			</li>

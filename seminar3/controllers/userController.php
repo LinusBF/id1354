@@ -7,7 +7,7 @@
  */
 
 include_once APP_PATH."models/user.php";
-include_once APP_PATH."integration/userTable.php";
+include_once APP_PATH."integration/userIntegration.php";
 
 class UserController {
 
@@ -33,6 +33,12 @@ class UserController {
 		die();
 	}
 
+	public function logout(){
+		session_destroy();
+		header("Location: ".LINK_PATH.'index.php?logged-out=1');
+		die();
+	}
+
 	public function register(){
 		if(!isset($_POST['callee'])){
 			header("Location: ".LINK_PATH.'index.php');
@@ -54,52 +60,6 @@ class UserController {
 			header( "Location: " . LINK_PATH . 'index.php?page='.$_POST['callee'].'&user-created=1&newUser=' . $newUser->getId() );
 		}
 		die();
-	}
-
-	/**
-	 * @param $sUserName
-	 * @param $sEmail
-	 * @param $sRawPass
-	 *
-	 * @return bool|User
-	 */
-	public static function create($sUserName, $sEmail, $sRawPass){
-		$sHashedPass = password_hash($sRawPass, PASSWORD_DEFAULT);
-		$user = new User($sUserName, $sEmail, $sHashedPass);
-		$userDB = new UserTable();
-		if($userDB === false) return false;
-
-		$iUserId = $userDB->putUser($user);
-
-		if($iUserId === false){
-			return false;
-		}
-
-		return new User($sUserName, $sEmail, $sHashedPass, $iUserId);
-	}
-
-	/**
-	 * @param $iUserId
-	 *
-	 * @return bool|User
-	 */
-	public static function get($iUserId){
-		$userDB = new UserTable();
-		if($userDB === false) return false;
-
-		return $userDB->getUser($iUserId);
-	}
-
-	/**
-	 * @param $sUserName
-	 *
-	 * @return bool|User
-	 */
-	private static function getByName($sUserName){
-		$userDB = new UserTable();
-		if($userDB === false) return false;
-
-		return $userDB->getUserByName($sUserName);
 	}
 
 	private function authUser($sUserName, $sRawPass){

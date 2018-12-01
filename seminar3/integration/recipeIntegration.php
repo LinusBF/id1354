@@ -8,10 +8,10 @@
 
 include_once APP_PATH."integration/dbConnection.php";
 
-class RecipeTable {
+class RecipeIntegration {
 	private const TABLE_NAME = "recipe";
 	private const TABLE_SQL = "	
-		CREATE TABLE ".RecipeTable::TABLE_NAME." (
+		CREATE TABLE " . RecipeIntegration::TABLE_NAME . " (
 		 `ID` int(11) NOT NULL AUTO_INCREMENT,
 		 `name` VARCHAR(255) NOT NULL,
 		 `title` VARCHAR(255) NOT NULL,
@@ -26,7 +26,7 @@ class RecipeTable {
 
 	public function __construct() {
 		$DB = new dbConnection();
-		$DB->migrateTable(RecipeTable::TABLE_NAME, RecipeTable::TABLE_SQL);
+		$DB->migrateTable(RecipeIntegration::TABLE_NAME, RecipeIntegration::TABLE_SQL);
 	}
 
 	public function getAllRecipeData(){

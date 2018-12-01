@@ -1,7 +1,3 @@
-<?php
-include_once APP_PATH."utils/navigationHelper.php";
-?>
-
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerUserModal" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
