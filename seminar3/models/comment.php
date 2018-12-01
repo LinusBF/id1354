@@ -24,13 +24,17 @@ class Comment {
 		$this->commentId          = $id;
 		$this->commentIntegration = new CommentTable();
 		if($id !== null){
-			$this->gatherDataFromStore();
+			$this->gatherDataFromStorage();
 		}
 	}
 
-	private function gatherDataFromStore() {
+	private function gatherDataFromStorage() {
 		$commentData = $this->commentIntegration->getComment($this->commentId);
 		if($commentData === false) return;
+		$this->commentFromDbData($commentData);
+	}
+
+	public function commentFromDbData($commentData){
 		$this->sContent    = $commentData['content'];
 		$this->recipeId    = $commentData['recipe'];
 		$this->authorId    = $commentData['author'];
@@ -38,12 +42,11 @@ class Comment {
 		$this->dateCreated = $commentData['created'];
 	}
 
-	public function fillWithData($commentData){
-		$this->sContent    = $commentData['content'];
-		$this->recipeId    = $commentData['recipe'];
-		$this->authorId    = $commentData['author'];
-		$this->commentId   = $commentData['ID'];
-		$this->dateCreated = $commentData['created'];
+	public function fillWithData($content, $recipeId, $author, $created){
+		$this->sContent    = $content;
+		$this->recipeId    = $recipeId;
+		$this->authorId    = $author;
+		$this->dateCreated = $created;
 	}
 
 	public function getId(){
@@ -64,6 +67,16 @@ class Comment {
 
 	public function getCreated(){
 		return $this->dateCreated;
+	}
+
+	public function saveToStorage(){
+		$commentId = $this->commentIntegration->putComment($this);
+		return $commentId;
+	}
+
+	public function deleteFromStorage(){
+		$result = $this->commentIntegration->deleteComment($this->commentId);
+		return $result;
 	}
 
 	/**

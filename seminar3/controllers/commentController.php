@@ -10,31 +10,53 @@ include_once APP_PATH."models/comment.php";
 include_once APP_PATH."integration/commentTable.php";
 
 class CommentController {
-	/**
-	 * @param $sContent
-	 * @param $iRecipeId
-	 * @param $iAuthorID
-	 *
-	 * @return bool|Comment
-	 */
-	public function createComment($sContent, $iRecipeId, $iAuthorID){
-		$comment = new Comment($sContent, $iRecipeId, $iAuthorID);
-		$commentDB = new CommentTable();
 
-		$iCommentId = $commentDB->putComment($comment);
-
-		if($iCommentId === false){
-			return false;
+	public function createComment(){
+		if(!isset($_POST['recipeId']) || !isset($_POST['content'])){
+			header("Location: ".LINK_PATH.'index.php?comment-made=-1');
+			die();
 		}
 
-		return CommentController::get($iCommentId);
+		$comment = new Comment();
+		$comment->fillWithData($_POST['content'], $_POST['recipeId'], $_SESSION['currentUser'], null);
+		$result = $comment->saveToStorage();
+
+		$sRecipeUrl = LINK_PATH.'index.php?page=recipe&recipe='.$comment->getRecipeId();
+
+		if($result === false){
+			header("Location: $sRecipeUrl"."&comment-made=0");
+		} else {
+			header( "Location: $sRecipeUrl"."&comment-made=1");
+		}
+		die();
 	}
 
-	public function deleteComment($iCommentId){
-		$comment = CommentController::get($iCommentId);
+	public function deleteComment(){
+		if(!isset($_POST['commentId'])){
+			header("Location: ".LINK_PATH.'index.php?page=home&comment-deleted=-1');
+			die();
+		}
+
+		$comment = new Comment($_POST['commentId']);
+		$result = $this->deleteIfUserIsAuthor($comment);
+		$sRecipeUrl = LINK_PATH.'index.php?page=recipe&recipe='.$comment->getRecipeId();
+
+		if($result === false){
+			header("Location: $sRecipeUrl"."&comment-deleted=0");
+		} else {
+			header( "Location: $sRecipeUrl"."&comment-deleted=1");
+		}
+		die();
+	}
+
+	/**
+	 * @param Comment $comment
+	 *
+	 * @return array|bool|int
+	 */
+	private function deleteIfUserIsAuthor($comment){
 		if($_SESSION['currentUser'] === $comment->getAuthorId()){
-			$commentDB = new CommentTable();
-			return $commentDB->deleteComment($comment->getId());
+			return $comment->deleteFromStorage();
 		} else {
 			return false;
 		}
@@ -75,7 +97,7 @@ class CommentController {
 
 		foreach ($commentsData as $commentData){
 			$comment = new Comment();
-			$comment->fillWithData($commentData);
+			$comment->commentFromDbData($commentData);
 			array_push($comments, $comment);
 		}
 

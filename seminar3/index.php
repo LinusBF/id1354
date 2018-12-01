@@ -10,28 +10,23 @@ function indexPage() {
 	$controller = new RecipeController();
 	$recipe = $controller->getRecipeFromStorage(1);
 	$view = new RecipeView($controller, $recipe);
-
-	if (isset($_GET['action']) && !empty($_GET['action'])) {
-		$controller->{$_GET['action']}();
-	}
-
 	$view->index();
 }
 
+$page = null;
 if(isset($_GET['page'])){
-	switch ($_GET['page']){
-		case "recipe":
-			require_once APP_PATH.'recipe.php';
-			break;
-		case "calendar":
-			require_once APP_PATH.'calendar.php';
-			break;
-		case "user":
-			require_once APP_PATH.'user.php';
-			break;
-		default:
-			indexPage();
-			break;
+	$page = $_GET['page'];
+} else if(isset($_POST['page'])){
+	$page = $_POST['page'];
+}
+
+
+if(isset($page)){
+	$pages = array("recipe", "calendar", "user", "comment");
+	if(in_array($page, $pages)){
+		require_once APP_PATH.$page.'.php';
+	} else {
+		indexPage();
 	}
 }
 else {

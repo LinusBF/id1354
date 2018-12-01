@@ -118,8 +118,9 @@ class RecipeView implements iViewTemplate {
 					?>
 					<div class="comment-form-container align-self-center">
 						<form class="d-flex flex-row justify-content-between" method="POST"
-							  action="<?php echo LINK_PATH . "comment.php"; ?>">
-							<input type="hidden" name="action" value="AddComment">
+							  action="<?php echo LINK_PATH . "index.php"; ?>">
+							<input type="hidden" name="page" value="comment">
+							<input type="hidden" name="action" value="createComment">
 							<input type="hidden" name="recipeId" value="<?php echo $this->recipe->id; ?>">
 							<div class="form-group w-75 mb-0">
 								<input type="text" class="form-control" id="commentContent" name="content"
@@ -181,8 +182,9 @@ class RecipeView implements iViewTemplate {
 				<h5 class="text-info"><?php echo $author->getName(); ?></h5>
 				<?php if(isset($_SESSION['currentUser']) && $_SESSION['currentUser'] === $comment->getAuthorId()):?>
 					<form class="d-none" id="delComment<?php echo $comment->getId(); ?>"
-						  action="<?php echo LINK_PATH."recipe.php";?>" method="GET">
-						<input type="hidden" name="action" value="DeleteComment">
+						  action="<?php echo LINK_PATH."index.php";?>" method="POST">
+						<input type="hidden" name="page" value="comment">
+						<input type="hidden" name="action" value="deleteComment">
 						<input type="hidden" name="commentId" value="<?php echo $comment->getId(); ?>">
 					</form>
 					<button type="button" class="btn btn-link text-danger"

@@ -1,9 +1,23 @@
 <?php
-DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar3/" : "/id1354/seminar3/");
-DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar3/" : str_replace("\\", "/", __DIR__)."/");
-include "./components/baseBody.php";
 include_once "./controllers/commentController.php";
-include_once "./controllers/recipeController.php";
+
+$controller = new CommentController();
+
+$action = null;
+if(isset($_GET['action'])){
+	$action = $_GET['action'];
+} else if(isset($_POST['action'])){
+	$action = $_POST['action'];
+}
+
+if (isset($action) && !empty($action)) {
+	$controller->{$action}();
+}
+
+header("Location: ".LINK_PATH.'index.php?');
+
+/*
+
 
 if(!key_exists("action", $_POST)
 	|| !key_exists("currentUser", $_SESSION)
@@ -54,3 +68,4 @@ if($_POST['action'] === "DeleteComment"){
 
 header("Location: ".LINK_PATH.'index.php');
 die();
+*/
