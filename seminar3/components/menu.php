@@ -51,7 +51,7 @@ function getUserMenu(){
 		<ul class="navbar-nav w-100 d-flex flex-row justify-content-between">
 			<li class="nav-item">
 				<a class="nav-link text-success" href="<?php echo LINK_PATH . "index.php?page=user&userId=" . $loggedInUser->getId(); ?>">
-					<?php echo $loggedInUser->getName(); ?>
+					<?php echo htmlspecialchars($loggedInUser->getName(), ENT_QUOTES, 'UTF-8'); ?>
 				</a>
 			</li>
 			<li class="nav-item">
