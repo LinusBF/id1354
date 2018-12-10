@@ -1,0 +1,44 @@
+.recipe-link a{
+	font-size: 18pt;
+}
+
+.recipe-wrapper {
+	width: 45%;
+}
+
+#recipe-hero {
+	width: 55%;
+}
+
+.instructions-wrapper {
+	text-align: left;
+}
+
+.instructions-list {
+	list-style: circle;
+}
+
+.tooltip-btn{
+	color: #FFFFFF;
+}
+
+.tooltip-btn:hover{
+	text-decoration: none;
+	color: #FFFFFF;
+	cursor: initial;
+}
+
+.comment-form-container{
+	position: absolute;
+	bottom: 0;
+	width: 75%;
+	height: 40px;
+}
+
+.recipe-comments {
+	height: 80%;
+	overflow-y: scroll;
+	padding: 10px;
+	background-color: rgb(47, 54, 65);
+	border-radius: 5px;
+}
