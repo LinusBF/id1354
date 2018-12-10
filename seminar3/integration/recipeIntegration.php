@@ -57,7 +57,7 @@ class RecipeIntegration {
                     {\"nr\": 2,\"instruction\": \"Put the {4} in a large bowl.\"},
                     {\"nr\": 3,\"instruction\": \"Add the {0}, {2} & {3} to the bowl and mix everything.\"},
                     {\"nr\": 4,\"instruction\": \"Add the {1} and {5} and mix again.\"},
-                    {\"nr\": 5,\"instruction\": \"Roll your meatballs to your desired size.\"},
+                    {\"nr\": 5,\"instruction\": \"Roll your meatballs to your desired size.\"}
                     ]'),
                     (2,
                     'Pancakes',

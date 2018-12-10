@@ -25,27 +25,8 @@ var_dump($recipeController->getRecipeByUrlName('meatballs'));
 </pre>
 */
 
-$sadasd = "[
-  {
-    \"nr\": 1,
-    \"instruction\": \"Get all the ingredients...\"
-  },
-  {
-    \"nr\": 2,
-    \"instruction\": \"Put the {4} in a large bowl.\"
-  },
-  {
-    \"nr\": 3,
-    \"instruction\": \"Add the {0}, {2} & {3} to the bowl and mix everything.\"
-  },
-  {
-    \"nr\": 4,
-    \"instruction\": \"Add the {1} and {5} and mix again.\"
-  },
-  {
-    \"nr\": 5,
-    \"instruction\": \"Roll your meatballs to your desired size.\"
-  }
-]";
+include "./integration/dbConnection.php";
 
-var_dump(json_decode($sadasd));
+$DB = new dbConnection();
+$sSQL = "DELETE FROM recipe WHERE 1 = 1";
+var_dump($DB->runQuery($sSQL, array()));
