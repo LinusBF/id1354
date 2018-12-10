@@ -58,7 +58,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" onclick="document.getElementById('loginForm').submit()">Login</button>
+				<button id="login-user" type="button" class="btn btn-primary">Login</button>
 			</div>
 		</div>
 	</div>

@@ -9,3 +9,5 @@
 		});
 	})
 </script>
+<script src="<?php echo LINK_PATH; ?>js/login.js"></script>
+<script src="<?php echo LINK_PATH; ?>js/logout.js"></script>
