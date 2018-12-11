@@ -12,15 +12,6 @@ include_once APP_PATH."integration/userIntegration.php";
 class UserController {
 
 	public function login(){
-		if(!isset($_POST['callee'])){
-			header("Location: ".LINK_PATH.'index.php');
-			die();
-		}
-
-		if(!isset($_POST['username']) || !isset($_POST['password'])){
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-login=-1');
-			die();
-		}
 
 		$authorized = $this->authUser($_POST['username'], $_POST['password']);
 
