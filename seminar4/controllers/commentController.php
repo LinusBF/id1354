@@ -7,46 +7,79 @@
  */
 
 include_once APP_PATH."models/comment.php";
+include_once APP_PATH."models/user.php";
 include_once APP_PATH."integration/commentIntegration.php";
 
 class CommentController {
 
 	public function createComment(){
 		if(!isset($_POST['recipeId']) || !isset($_POST['content'])){
-			header("Location: ".LINK_PATH.'index.php?comment-made=-1');
-			die();
+			return array('status_code' => 400, "data" => "ERROR! Missing POST params!");
 		}
 
 		$comment = new Comment();
 		$comment->fillWithData($_POST['content'], $_POST['recipeId'], $_SESSION['currentUser'], null);
 		$result = $comment->saveToStorage();
 
-		$sRecipeUrl = LINK_PATH.'index.php?page=recipe&recipe='.$comment->getRecipeId();
-
 		if($result === false){
-			header("Location: $sRecipeUrl"."&comment-made=0");
+			return array(
+				"status_code" => 500,
+				"data" => array("error" => "Could not create comment!")
+			);
 		} else {
-			header( "Location: $sRecipeUrl"."&comment-made=1");
+			return array(
+				"status_code" => 200,
+				"data" => array("success" => "Comment created!")
+			);
 		}
-		die();
 	}
 
 	public function deleteComment(){
 		if(!isset($_POST['commentId'])){
-			header("Location: ".LINK_PATH.'index.php?page=home&comment-deleted=-1');
-			die();
+			return array('status_code' => 400, "data" => "ERROR! Missing POST params!");
 		}
 
 		$comment = new Comment($_POST['commentId']);
 		$result = $this->deleteIfUserIsAuthor($comment);
-		$sRecipeUrl = LINK_PATH.'index.php?page=recipe&recipe='.$comment->getRecipeId();
 
 		if($result === false){
-			header("Location: $sRecipeUrl"."&comment-deleted=0");
+			return array(
+				"status_code" => 401,
+				"data" => array("error" => "Could not delete comment! Are you the author?")
+			);
 		} else {
-			header( "Location: $sRecipeUrl"."&comment-deleted=1");
+			return array(
+				"status_code" => 200,
+				"data" => array("success" => "Comment deleted!")
+			);
 		}
-		die();
+	}
+
+	public function getComments() {
+
+		if(!isset($_POST['recipeId'])){
+			return array('status_code' => 400, "data" => "ERROR! Missing POST params!");
+		}
+
+		$comments = $this->getCommentsByRecipe($_POST['recipeId']);
+		$formattedComments = array();
+
+		foreach ($comments as $comment){
+			$escapedAndFormattedComment = array(
+				"id" => $comment->getId(),
+				"authorId" => $comment->getAuthorId(),
+				"authorName" => htmlspecialchars(User::getAuthorToComment($comment)->username, ENT_QUOTES, 'UTF-8'),
+				"content" => htmlspecialchars($comment->sContent, ENT_QUOTES, 'UTF-8')
+			);
+			array_push($formattedComments, $escapedAndFormattedComment);
+		}
+
+		return array(
+			"status_code" => 200,
+			"data" => array(
+				"userId" => (isset($_SESSION['currentUser']) ? $_SESSION['currentUser'] : -1),
+				"comments" => $formattedComments)
+		);
 	}
 
 	/**

@@ -1,17 +1,22 @@
 <?php
+DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar4/" : "/id1354/seminar4/");
+DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar4/" : str_replace("\\", "/", __DIR__)."/");
 include_once "./controllers/commentController.php";
+
+session_start();
+
+$response = array(
+	"status_code" => 500,
+	"data" => "ERROR! Controller action not set!"
+);
 
 $controller = new CommentController();
 
-$action = null;
-if(isset($_GET['action'])){
-	$action = $_GET['action'];
-} else if(isset($_POST['action'])){
-	$action = $_POST['action'];
+if (isset($_POST['action']) && !empty($_POST['action'])) {
+	$response = $controller->{$_POST['action']}();
 }
 
-if (isset($action) && !empty($action)) {
-	$controller->{$action}();
-}
+http_response_code($response['status_code']);
 
-header("Location: ".LINK_PATH.'index.php?');
+echo json_encode($response['data']);
+die();

@@ -12,22 +12,22 @@
 					<input type="hidden" name="action" value="CreateUser">
 					<input type="hidden" name="callee" value="<?php echo (isset($_GET['page']) ? $_GET['page'] : 'home'); ?>">
 					<div class="form-group">
-						<label for="userName">Username</label>
+						<label for="userNameReg">Username</label>
 						<input type="text" class="form-control" id="userNameReg" name="username" placeholder="Enter username">
 					</div>
 					<div class="form-group">
-						<label for="userEmail">Email address</label>
+						<label for="userEmailReg">Email address</label>
 						<input type="email" class="form-control" id="userEmailReg" name="email" placeholder="Enter email">
 					</div>
 					<div class="form-group">
-						<label for="userPassword">Password</label>
+						<label for="userPasswordReg">Password</label>
 						<input type="password" class="form-control" id="userPasswordReg" name="password" placeholder="Password">
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" onclick="document.getElementById('userForm').submit()">Register</button>
+				<button type="button" class="btn btn-primary">Register</button>
 			</div>
 		</div>
 	</div>
@@ -47,11 +47,11 @@
 					<input type="hidden" name="action" value="LoginUser">
 					<input type="hidden" name="callee" value="<?php echo (isset($_GET['page']) ? $_GET['page'] : 'home'); ?>">
 					<div class="form-group">
-						<label for="userName">Username</label>
+						<label for="userNameLogin">Username</label>
 						<input type="text" class="form-control" id="userNameLogin" name="username" placeholder="Enter username">
 					</div>
 					<div class="form-group">
-						<label for="userPassword">Password</label>
+						<label for="userPasswordLogin">Password</label>
 						<input type="password" class="form-control" id="userPasswordLogin" name="password" placeholder="Password">
 					</div>
 				</form>

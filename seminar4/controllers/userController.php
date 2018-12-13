@@ -34,18 +34,13 @@ class UserController {
 
 	public function logout(){
 		session_destroy();
-		return array('status_code' => 200, "data" => "Logged out!");
+		return array('status_code' => 200, "data" => array("success" => "Logged out!"));
 	}
 
 	public function register(){
-		if(!isset($_POST['callee'])){
-			header("Location: ".LINK_PATH.'index.php');
-			die();
-		}
 
 		if(!isset($_POST['username']) || !isset($_POST['email']) || !isset($_POST['password'])){
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-created=-1');
-			die();
+			return array('status_code' => 400, "data" => "ERROR! Missing POST params!");
 		}
 
 		$newUser = new User();

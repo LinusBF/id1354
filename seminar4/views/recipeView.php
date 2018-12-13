@@ -104,11 +104,12 @@ class RecipeView implements iViewTemplate {
 			$aComments = $this->recipe->getComments();
 			?>
 			<div class="side-bar-content text-center d-none d-md-flex flex-column justify-content-start">
+				<input id="recipeId" type="hidden" name="recipeId" value="<?php echo $this->recipe->id; ?>">
 				<h3 class="mb-3">Recipe Comments:</h3>
-				<div class="recipe-comments">
-					<?php
+				<div id="commentContainer" class="recipe-comments">
+				<?php
 					foreach ( $aComments as $comment ) {
-						$author = User::getAuthorToComment($comment);
+						$author = User::getAuthorToComment( $comment );
 						$this->printComment( $comment, $author );
 					}
 					?>
@@ -116,19 +117,22 @@ class RecipeView implements iViewTemplate {
 				<?php
 				if ( isset( $_SESSION['currentUser'] ) ):
 					?>
+					<input id="sessionUser" type="hidden" value="<?php echo $_SESSION['currentUser']; ?>">
 					<div class="comment-form-container align-self-center">
 						<form class="d-flex flex-row justify-content-between" method="POST"
 							  action="<?php echo LINK_PATH . "index.php"; ?>">
 							<input type="hidden" name="page" value="comment">
 							<input type="hidden" name="action" value="createComment">
-							<input type="hidden" name="recipeId" value="<?php echo $this->recipe->id; ?>">
 							<div class="form-group w-75 mb-0">
 								<input type="text" class="form-control" id="commentContent" name="content"
 									   aria-describedby="commentHelp" placeholder="Comment">
 							</div>
-							<button type="submit" class="btn btn-primary h-25 align-self-end">Comment</button>
+							<button id="create-comment" class="btn btn-primary h-25 align-self-end">Comment</button>
 						</form>
 					</div>
+				<?php else:?>
+					<input id="sessionUser" type="hidden" value="-1">
+					<div class="comment-form-container align-self-center"></div>
 				<?php endif; ?>
 			</div>
 		<?php
@@ -155,21 +159,28 @@ class RecipeView implements iViewTemplate {
 		<?php
 	}
 
+	public function footerContent() {
+		?>
+		<script src="<?php echo LINK_PATH . "js/comments.js"; ?>"></script>
+		<?php
+	}
+
 	public function show() {
 		BaseView::printBody(
-				'recipe',
-				array( $this, 'pageHeadTag' ),
-				array( $this, 'pageContent' ),
-				array( $this, 'sidebarContent' )
+			'recipe',
+			array( $this, 'pageHeadTag' ),
+			array( $this, 'pageContent' ),
+			array( $this, 'sidebarContent' ),
+			array( $this, 'footerContent' )
 		);
 	}
 
 	public function index() {
 		BaseView::printBody(
-				'index',
-				array( $this, 'pageHeadTagIndex' ),
-				array( $this, 'pageContentIndex' ),
-				array( $this, 'sidebarContentIndex' )
+			'index',
+			array( $this, 'pageHeadTagIndex' ),
+			array( $this, 'pageContentIndex' ),
+			array( $this, 'sidebarContentIndex' )
 		);
 	}
 
@@ -177,14 +188,14 @@ class RecipeView implements iViewTemplate {
 	 * @param Comment $comment
 	 * @param User $author
 	 */
-	private function printComment($comment, $author){
+	private function printComment( $comment, $author ) {
 		?>
 		<div class="comment-container px-3 py-3 border-bottom border-secondary">
 			<div class="comment-header d-flex flex-row justify-content-between">
 				<h5 class="text-info"><?php echo $author->getName(); ?></h5>
-				<?php if(isset($_SESSION['currentUser']) && $_SESSION['currentUser'] === $comment->getAuthorId()):?>
+				<?php if ( isset( $_SESSION['currentUser'] ) && $_SESSION['currentUser'] === $comment->getAuthorId() ): ?>
 					<form class="d-none" id="delComment<?php echo $comment->getId(); ?>"
-						  action="<?php echo LINK_PATH."index.php";?>" method="POST">
+						  action="<?php echo LINK_PATH . "index.php"; ?>" method="POST">
 						<input type="hidden" name="page" value="comment">
 						<input type="hidden" name="action" value="deleteComment">
 						<input type="hidden" name="commentId" value="<?php echo $comment->getId(); ?>">
@@ -195,7 +206,7 @@ class RecipeView implements iViewTemplate {
 					</button>
 				<?php endif; ?>
 			</div>
-			<p><?php echo htmlspecialchars($comment->sContent, ENT_QUOTES, 'UTF-8'); ?></p>
+			<p><?php echo htmlspecialchars( $comment->sContent, ENT_QUOTES, 'UTF-8' ); ?></p>
 		</div>
 		<?php
 	}
@@ -205,8 +216,8 @@ class RecipeView implements iViewTemplate {
 		$recipe  = $this->recipe;
 
 		$replaceFunction = function ( $match ) use ( &$ingredients, &$recipe ) {
-			$ingredientId = substr( $match[0], 1, 1 );
-			$ingredient = $ingredients[ $ingredientId ];
+			$ingredientId     = substr( $match[0], 1, 1 );
+			$ingredient       = $ingredients[ $ingredientId ];
 			$ingredientAmount = null;
 			foreach ( $recipe->ingredients as $i ) {
 				if ( $i->id == $ingredientId ) {

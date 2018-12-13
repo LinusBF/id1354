@@ -8,7 +8,7 @@
 
 class BaseView {
 
-	public static function printBody($pageName, callable $headTag, callable $mainContent, callable $sideContent){
+	public static function printBody($pageName, callable $headTag, callable $mainContent, callable $sideContent, callable $footer = null){
 		include_once APP_PATH."components/menu.php";
 		include_once  APP_PATH."components/errorHandler.php";
 		?>
@@ -37,6 +37,7 @@ class BaseView {
 		</div>
 		<?php include APP_PATH."components/defaultFooter.php" ?>
 		<?php include APP_PATH."components/modals.php" ?>
+		<?php if(isset($footer)){$footer();}?>
 		</body>
 		</html>
 		<?php
