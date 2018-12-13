@@ -13,21 +13,28 @@ class UserController {
 
 	public function login(){
 
+	    if(!isset($_POST['username']) || !isset($_POST['password'])){
+	        return array('status_code' => 400, "data" => "ERROR! Missing POST params!");
+        }
+
 		$authorized = $this->authUser($_POST['username'], $_POST['password']);
 
 		if($authorized === false){
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-login=0');
+            return array('status_code' => 401, "data" => "Unauthorized!");
 		} else {
 			$_SESSION['currentUser'] = $authorized;
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-login=1');
+			$user = User::getLoggedInUser();
+            return array('status_code' => 200, "data" => array(
+                'id' => $authorized,
+                'userLink' => LINK_PATH . "index.php?page=user&userId=" . $authorized,
+                'name' => htmlspecialchars($user->getName(), ENT_QUOTES, 'UTF-8')
+            ));
 		}
-		die();
 	}
 
 	public function logout(){
 		session_destroy();
-		header("Location: ".LINK_PATH.'index.php?logged-out=1');
-		die();
+		return array('status_code' => 200, "data" => "Logged out!");
 	}
 
 	public function register(){

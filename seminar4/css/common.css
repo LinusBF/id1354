@@ -58,6 +58,10 @@ a:hover {
 	border-bottom: 0;
 }
 
+#logout-user {
+	cursor: pointer;
+}
+
 .navbar-collapse {
 	text-align: right;
 }

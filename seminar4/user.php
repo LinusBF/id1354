@@ -1,29 +1,25 @@
 <?php
-DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar3/" : "/id1354/seminar3/");
-DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar3/" : str_replace("\\", "/", __DIR__)."/");
+DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar4/" : "/id1354/seminar4/");
+DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar4/" : str_replace("\\", "/", __DIR__)."/");
 include_once "./controllers/userController.php";
+
+session_start();
 
 $response = array(
     "status_code" => 500,
-    "response" => array()
+    "data" => "ERROR! Controller action not set!"
 );
-
-if(!isset($_POST['callee'])){
-    $response['status_code'] = 400;
-}
-
-if(!isset($_POST['username']) || !isset($_POST['password'])){
-    header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-login=-1');
-    die();
-}
 
 $controller = new UserController();
 
-if (isset($_GET['action']) && !empty($_GET['action'])) {
-	$controller->{$_GET['action']}();
+if (isset($_POST['action']) && !empty($_POST['action'])) {
+    $response = $controller->{$_POST['action']}();
 }
 
-header("Location: ".LINK_PATH.'index.php?');
+http_response_code($response['status_code']);
+
+echo json_encode($response['data']);
+die();
 
 /*
  * NOT IMPLEMENTED
