@@ -48,11 +48,14 @@ class UserController {
 		$userId = $newUser->storeUser();
 
 		if($userId === false){
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-created=0');
+            return array('status_code' => 500, "data" => array(
+                'error' => "Could not create user!"
+            ));
 		} else {
-			header( "Location: " . LINK_PATH . 'index.php?page='.$_POST['callee'].'&user-created=1&newUser=' . $newUser->getId() );
+            return array('status_code' => 200, "data" => array(
+                'id' => $userId
+            ));
 		}
-		die();
 	}
 
 	private function authUser($sUserName, $sRawPass){
