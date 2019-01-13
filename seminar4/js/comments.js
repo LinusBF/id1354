@@ -1,5 +1,22 @@
 $(document).ready(function ($) {
-	const printComments = (recipeId) => {
+	const printComments = (comments, userId) => {
+        let container = $('#commentContainer');
+        container.html("");
+        comments.forEach(function (comment) {
+            let commentHTML = "<div class=\"comment-container px-3 py-3 border-bottom border-secondary\">" +
+				"<input name='commentId' type='hidden' value='" + comment['id'] + "' />" +
+                "<div class=\"comment-header d-flex flex-row justify-content-between\">" +
+                "<h5 class=\"text-info\">" + comment['authorName'] + "</h5>";
+            if(userId === comment['authorId']){
+                commentHTML += "<input class='commentId' type='hidden' value='" + comment['id'] + "'>" +
+                    "<button type=\"button\" class=\"btn btn-link text-danger delete-comment\">delete</button>";
+            }
+            commentHTML += "</div><p>" + comment['content'] + "</p></div>";
+            container.append(commentHTML);
+        });
+	};
+
+	const fetchComments = (recipeId) => {
 		$.ajax({
 			type: "POST",
 			url: "comment.php",
@@ -12,25 +29,41 @@ $(document).ready(function ($) {
 				let parsedResult = JSON.parse(result);
 				let comments = parsedResult['comments'];
 				let userId = parsedResult['userId'];
-				let container = $('#commentContainer');
-				container.html("");
-				console.log(comments);
-				comments.forEach(function (comment) {
-					let commentHTML = "<div class=\"comment-container px-3 py-3 border-bottom border-secondary\">" +
-						"<div class=\"comment-header d-flex flex-row justify-content-between\">" +
-						"<h5 class=\"text-info\">" + comment['authorName'] + "</h5>";
-					if(userId === comment['authorId']){
-						commentHTML += "<input class='commentId' type='hidden' value='" + comment['id'] + "'>" +
-							"<button type=\"button\" class=\"btn btn-link text-danger delete-comment\">delete</button>";
-					}
-					commentHTML += "</div><p>" + comment['content'] + "</p></div>";
-					container.append(commentHTML);
-				})
+                printComments(comments, userId);
 			}
 		});
 	};
 
-	$(".side-bar-content").on('click', "#create-comment", function (event) {
+    const pollComments = () => {
+    	let commentIds = [];
+
+        $('#commentContainer').children('.comment-container').each(function () {
+			const commentId = $(this).children("input[name='commentId']").val();
+			commentIds.push(parseInt(commentId));
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "comment.php",
+			async: true,
+            data:
+                {
+                    "action": "pollComments",
+                    "recipeId": $("#recipeId").val(),
+                    "clientCommentIds": commentIds
+                },
+            success: function (result) {
+                let parsedResult = JSON.parse(result);
+                let comments = parsedResult['comments'];
+                let userId = parsedResult['userId'];
+                printComments(comments, userId);
+                setTimeout(pollComments());
+            }
+        });
+    };
+
+
+    $(".side-bar-content").on('click', "#create-comment", function (event) {
 		event.preventDefault();
 
 		$.ajax({
@@ -45,7 +78,7 @@ $(document).ready(function ($) {
 			success: function (result) {
 				let parsedResult = JSON.parse(result);
 				$("#commentContent").val("");
-				printComments($("#recipeId").val());
+				fetchComments($("#recipeId").val());
 			}
 		});
 	});
@@ -65,7 +98,7 @@ $(document).ready(function ($) {
 				},
 			success: function (result) {
 				let parsedResult = JSON.parse(result);
-				printComments($("#recipeId").val());
+				fetchComments($("#recipeId").val());
 			}
 		});
 	});
@@ -91,9 +124,10 @@ $(document).ready(function ($) {
 		console.log("User menu changed!");
 		cooldown = true;
 		setTimeout(() => cooldown = false, 3000);
-		printComments($("#recipeId").val());
+		fetchComments($("#recipeId").val());
 		addCommentFieldIfLoggedIn();
 	});
 
-	printComments($("#recipeId").val());
+	fetchComments($("#recipeId").val());
+	setTimeout(pollComments, 5000);
 });

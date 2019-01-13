@@ -62,17 +62,7 @@ class CommentController {
 		}
 
 		$comments = $this->getCommentsByRecipe($_POST['recipeId']);
-		$formattedComments = array();
-
-		foreach ($comments as $comment){
-			$escapedAndFormattedComment = array(
-				"id" => $comment->getId(),
-				"authorId" => $comment->getAuthorId(),
-				"authorName" => htmlspecialchars(User::getAuthorToComment($comment)->username, ENT_QUOTES, 'UTF-8'),
-				"content" => htmlspecialchars($comment->sContent, ENT_QUOTES, 'UTF-8')
-			);
-			array_push($formattedComments, $escapedAndFormattedComment);
-		}
+		$formattedComments = $this->packageCommentsForJSON($comments);
 
 		return array(
 			"status_code" => 200,
@@ -81,6 +71,40 @@ class CommentController {
 				"comments" => $formattedComments)
 		);
 	}
+
+	public function pollComments(){
+        if(!isset($_POST['recipeId']) || !isset($_POST['clientCommentIds'])){
+            return array('status_code' => 400, "data" => "ERROR! Missing POST params!");
+        }
+
+        set_time_limit(0);
+
+        $clientCommentIds = $_POST['clientCommentIds'];
+
+        while(true) {
+            $comments = $this->getCommentsByRecipe($_POST['recipeId']);
+            $commentIds = array();
+            foreach ($comments as $comment){
+                array_push($commentIds, $comment->getId());
+            }
+
+            if(count($clientCommentIds) !== count($commentIds)){
+                $formattedComments = $this->packageCommentsForJSON($comments);
+
+                return array(
+                    "status_code" => 200,
+                    "data" => array(
+                        "userId" => (isset($_SESSION['currentUser']) ? $_SESSION['currentUser'] : -1),
+                        "comments" => $formattedComments)
+                );
+            }
+            session_write_close();
+            sleep(1);
+            session_start();
+        }
+
+        return array('status_code' => 500, "data" => "Polling error!");
+    }
 
 	/**
 	 * @param Comment $comment
@@ -114,4 +138,25 @@ class CommentController {
 
 		return $comments;
 	}
+
+    /**
+     * @param Comment[] $comments
+     *
+     * @return array
+     */
+    public function packageCommentsForJSON($comments){
+        $formattedComments = array();
+
+        foreach ($comments as $comment){
+            $escapedAndFormattedComment = array(
+                "id" => $comment->getId(),
+                "authorId" => $comment->getAuthorId(),
+                "authorName" => htmlspecialchars(User::getAuthorToComment($comment)->username, ENT_QUOTES, 'UTF-8'),
+                "content" => htmlspecialchars($comment->sContent, ENT_QUOTES, 'UTF-8')
+            );
+            array_push($formattedComments, $escapedAndFormattedComment);
+        }
+
+        return $formattedComments;
+    }
 }
