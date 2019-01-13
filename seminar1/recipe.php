@@ -51,7 +51,7 @@ $pageContent = function () {
 		</div>
 	</div>
 	<div id="recipe-hero" class="hero-img">
-		<img class="" src="media/<?php echo $currentRecipe['heroImg']; ?>" alt="<?php echo $currentRecipe['name']; ?>">
+		<img class="featured-image" src="media/<?php echo $currentRecipe['heroImg']; ?>" alt="<?php echo $currentRecipe['name']; ?>">
 	</div>
 	<?php
 };

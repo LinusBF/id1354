@@ -9,3 +9,19 @@
 		});
 	})
 </script>
+<script>
+    let userAgent, ieReg, ie;
+    userAgent = window.navigator.userAgent;
+    ieReg = /msie|Trident.*rv[ :]*11\./gi;
+    ie = ieReg.test(userAgent);
+
+    if(ie) {
+        $(".hero-img").each(function () {
+            let $container = $(this),
+                imgUrl = $container.find("img").prop("src");
+            if (imgUrl) {
+                $container.css("backgroundImage", 'url(' + imgUrl + ')').addClass("custom-object-fit");
+            }
+        });
+    }
+</script>

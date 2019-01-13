@@ -118,3 +118,13 @@ a:hover {
 	-o-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
+
+.custom-object-fit {
+	position: relative;
+	background-size: cover;
+	background-position: center center;
+}
+
+.custom-object-fit .featured-image{
+	opacity: 0;
+}
