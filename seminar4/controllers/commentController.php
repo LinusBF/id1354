@@ -88,7 +88,10 @@ class CommentController {
                 array_push($commentIds, $comment->getId());
             }
 
-            if(count($clientCommentIds) !== count($commentIds)){
+            $arrayDiffClient = array_diff($clientCommentIds, $commentIds);
+            $arrayDiffServer = array_diff($commentIds, $clientCommentIds);
+
+            if(count($arrayDiffClient) > 0 || count($arrayDiffServer) > 0){
                 $formattedComments = $this->packageCommentsForJSON($comments);
 
                 return array(

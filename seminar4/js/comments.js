@@ -129,5 +129,5 @@ $(document).ready(function ($) {
 	});
 
 	fetchComments($("#recipeId").val());
-	setTimeout(pollComments, 5000);
+	setTimeout(pollComments, 2000);
 });
