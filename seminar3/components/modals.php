@@ -13,7 +13,7 @@
 					<input type="hidden" name="callee" value="<?php echo (isset($_GET['page']) ? $_GET['page'] : 'home'); ?>">
 					<div class="form-group">
 						<label for="userName">Username</label>
-						<input type="text" class="form-control" id="userName" name="username" placeholder="Enter username">
+						<input type="text" class="form-control" id="userNameReg" name="username" placeholder="Enter username">
 					</div>
 					<div class="form-group">
 						<label for="userEmail">Email address</label>
@@ -21,7 +21,7 @@
 					</div>
 					<div class="form-group">
 						<label for="userPassword">Password</label>
-						<input type="password" class="form-control" id="userPassword" name="password" placeholder="Password">
+						<input type="password" class="form-control" id="userPasswordReg" name="password" placeholder="Password">
 					</div>
 				</form>
 			</div>

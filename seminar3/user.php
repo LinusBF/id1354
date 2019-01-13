@@ -2,15 +2,15 @@
 DEFINE("LINK_PATH", getenv("PRODUCTION") !== false ? "/seminar3/" : "/id1354/seminar3/");
 DEFINE("APP_PATH", getenv( "PRODUCTION" ) !== false ? $_SERVER["DOCUMENT_ROOT"]."/seminar3/" : str_replace("\\", "/", __DIR__)."/");
 include_once "./controllers/userController.php";
+include_once "./views/userView.php";
 
 
 $controller = new UserController();
+$view = new UserView($controller);
 
-if (isset($_GET['action']) && !empty($_GET['action'])) {
-	$controller->{$_GET['action']}();
-}
+$view->performUserAction();
 
-header("Location: ".LINK_PATH.'index.php?');
+$view->redirect();
 
 /*
  * NOT IMPLEMENTED

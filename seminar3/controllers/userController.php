@@ -11,55 +11,77 @@ include_once APP_PATH."integration/userIntegration.php";
 
 class UserController {
 
-	public function login(){
-		if(!isset($_POST['callee'])){
-			header("Location: ".LINK_PATH.'index.php');
-			die();
+    public $sReturnPage;
+    public $aReturnOptions;
+    private $callee;
+    private $username;
+    private $password;
+    private $email;
+
+    public function __construct() {
+        $this->sReturnPage = "index.php";
+        $this->aReturnOptions = array();
+    }
+
+    public function setUserData($callee, $username, $password, $email = null){
+        $this->callee = $callee;
+        $this->username = $username;
+        $this->password = $password;
+        $this->email = $email;
+    }
+
+    public function login(){
+        if(!isset($this->callee)){
+		    return false;
 		}
 
-		if(!isset($_POST['username']) || !isset($_POST['password'])){
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-login=-1');
-			die();
+        $this->aReturnOptions['page'] = $this->callee;
+
+		if(!isset($this->username) || !isset($this->password)){
+            $this->aReturnOptions['user-login'] = -1;
+            return false;
 		}
 
-		$authorized = $this->authUser($_POST['username'], $_POST['password']);
+		$authorized = $this->authUser($this->username, $this->password);
 
 		if($authorized === false){
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-login=0');
+            $this->aReturnOptions['user-login'] = 0;
+            return false;
 		} else {
 			$_SESSION['currentUser'] = $authorized;
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-login=1');
+            $this->aReturnOptions['user-login'] = 1;
+            return true;
 		}
-		die();
 	}
 
 	public function logout(){
 		session_destroy();
-		header("Location: ".LINK_PATH.'index.php?logged-out=1');
-		die();
+        $this->aReturnOptions['logged-out'] = 1;
+		return true;
 	}
 
 	public function register(){
-		if(!isset($_POST['callee'])){
-			header("Location: ".LINK_PATH.'index.php');
-			die();
+		if(!isset($this->callee)){
+		    return false;
 		}
 
-		if(!isset($_POST['username']) || !isset($_POST['email']) || !isset($_POST['password'])){
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-created=-1');
-			die();
+		if(!isset($this->username) || !isset($this->email) || !isset($this->password)){
+            $this->aReturnOptions['user-created'] = -1;
+            return false;
 		}
 
 		$newUser = new User();
-		$newUser->fillWithData($_POST['username'], $_POST['email'], $_POST['password']);
+		$newUser->fillWithData($this->username, $this->email, $this->password);
 		$userId = $newUser->storeUser();
 
 		if($userId === false){
-			header("Location: ".LINK_PATH.'index.php?page='.$_POST['callee'].'&user-created=0');
+            $this->aReturnOptions['user-created'] = 0;
+            return false;
 		} else {
-			header( "Location: " . LINK_PATH . 'index.php?page='.$_POST['callee'].'&user-created=1&newUser=' . $newUser->getId() );
+            $this->aReturnOptions['user-created'] = 1;
+            $this->aReturnOptions['newUser'] = $newUser->getId();
+            return true;
 		}
-		die();
 	}
 
 	private function authUser($sUserName, $sRawPass){
